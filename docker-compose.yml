@@ -1,0 +1,39 @@
+services:
+
+  # データベースのサービス
+  db:
+    container_name: linuqz-db-1
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root # rootユーザーのパスワード
+      MYSQL_DATABASE: linuqz_db # データベース名
+      MYSQL_USER: user # データベースユーザー名
+      MYSQL_PASSWORD: password # データベースユーザーのパスワード
+      TZ: 'Asia/Tokyo' # DBのタイムゾーンを東京に設定
+    volumes:
+      - db_data:/var/lib/mysql
+    # ヘルスチェック MySQLのコンテナが起動してからDjangoのコンテナを起動させる
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Djangoのサービス
+  web:
+    container_name: linuqz-web-1
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condition: service_healthy
+    command: python manage.py runserver 0.0.0.0:8000
+
+  
+volumes:
+    db_data:

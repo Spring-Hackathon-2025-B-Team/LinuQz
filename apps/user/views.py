@@ -1,13 +1,11 @@
 from django.contrib.auth import login, authenticate
 from django.views.generic import TemplateView, CreateView
+from django.contrib.auth.views import LoginView as BaseLoginView
 from django.urls import reverse_lazy
-from .forms import SignUpForm
+from .forms import SignUpForm, LoginForm
 
 class HomeView(TemplateView):
     template_name = "home.html"
-
-class LoginView(TemplateView):
-    template_name = "user/login.html"
 
 # ユーザー登録ビュー
 class SignupView(CreateView):
@@ -23,3 +21,8 @@ class SignupView(CreateView):
         if user is not None:
             login(self.request, user)
         return response
+
+# ユーザーログインビュー
+class LoginView(BaseLoginView):
+    form_class = LoginForm
+    template_name = "user/login.html"

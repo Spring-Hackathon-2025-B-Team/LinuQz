@@ -1,7 +1,11 @@
 from django.contrib import admin
 from django.urls import path
-from .views import signup_view
+from . import views
+
+app_name = "user"
 
 urlpatterns = [
-    path('signup/', signup_view, {}),
+    path("", views.HomeView.as_view(), name="home"),
+    path('signup/', views.SignupView.as_view(), name="signup"),
+    path('login/', views.LoginView.as_view(), name="login"),
 ]

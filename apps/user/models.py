@@ -37,7 +37,7 @@ class UserManager(BaseUserManager):
 # カスタムユーザーモデル
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(verbose_name='名前', max_length=10, unique=True)
+    name = models.CharField(verbose_name='ユーザー名', max_length=50, unique=True)
     email = models.EmailField(verbose_name='メールアドレス', max_length=50, unique=True)
     level = models.IntegerField(verbose_name='レベル', default=1, null=False, blank=False)
     exp = models.IntegerField(verbose_name='経験値', default=0, null=False, blank=False)

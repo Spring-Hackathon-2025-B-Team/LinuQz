@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block title %} {% if user.is_authenticated %}
+<div class="h1">TOPページ</div>
+{% else %}
+<div class="h1">会員登録をしてください</div>
+{% endif %} {% endblock %} {% block content %} {% if user.is_authenticated %}
+<div class="h2">Welcome {{ user.name }}</div>
+{% else %}
+<a href="{% url 'user:signup' %}" class="btn btn-primary">Signup</a>
+<a href="{% url 'user:login' %}" class="btn btn-primary">Login</a>
+{% endif %} {% endblock %}

@@ -5,7 +5,9 @@ from .models import User
 
 # カスタムユーザーモデル用のユーザー登録フォーム
 class SignUpForm(UserCreationForm):
-  
+
+    usable_password = None  
+    
     class Meta:
         model = User
         fields = ('name', 'email')
@@ -16,6 +18,7 @@ class SignUpForm(UserCreationForm):
             field.widget.attrs.update({'class': 'form-control'})
 
 
+# ログインフォーム
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

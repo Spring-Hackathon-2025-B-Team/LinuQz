@@ -4,14 +4,11 @@ from django.contrib.auth.views import LoginView as BaseLoginView, LogoutView as 
 from django.urls import reverse_lazy
 from .forms import SignUpForm, LoginForm
 
-class HomeView(TemplateView):
-    template_name = "home.html"
-
 # ユーザー登録ビュー
 class SignupView(CreateView):
     form_class = SignUpForm
     template_name = "user/signup.html"
-    success_url = reverse_lazy("user:home")
+    success_url = reverse_lazy("home:index")
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -30,4 +27,3 @@ class LoginView(BaseLoginView):
 # ユーザーログアウトビュー
 class LogoutView(BaseLogoutView):
     success_url = reverse_lazy("user:login")
-    

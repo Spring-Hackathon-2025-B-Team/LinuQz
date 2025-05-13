@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}アカウント編集{% endblock %}
+
+{% block content %}
+
+    <div class="auth-container">
+        <div class="auth-box">
+            <p>アカウント編集</p>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="input_item">
+                    <label for="name">ユーザ名：</label>
+                    <input type="text" id="name" name="name" value="{{ user.name }}" class="input_item_text">
+                </div>
+
+                <button type="submit" class="button_login">更新</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}

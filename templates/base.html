@@ -44,8 +44,8 @@
                 ユーザ名：{{ user.name }}
 
                 <!-- アカウント編集 -->
-                <a href="#">
-                    <img src="{% static 'images/user_edit.png' %}" width="35" height="35" class="account_icon">
+                <a href="{% url 'home:account' %}">
+                    <img src="{% static 'images/user_edit.png' %}" width="30" height="30" class="account_icon">
                 </a>
         
                 <!-- レベルとアイコン表示（レベルに応じてアイコンを出し分け） -->

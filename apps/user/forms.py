@@ -5,7 +5,7 @@ from .models import User
 
 # カスタムユーザーモデル用のユーザー登録フォーム
 class SignUpForm(UserCreationForm):
-    usable_password = None
+  
     class Meta:
         model = User
         fields = ('name', 'email')

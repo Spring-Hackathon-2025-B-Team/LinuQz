@@ -4,6 +4,11 @@
 <div class="h1">会員登録をしてください</div>
 {% endif %} {% endblock %} {% block content %} {% if user.is_authenticated %}
 <div class="h2">Welcome {{ user.name }}</div>
+
+<form method="post" action="{% url 'user:logout' %}">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-primary">Logout</button>
+</form>
 {% else %}
 <a href="{% url 'user:signup' %}" class="btn btn-primary">Signup</a>
 <a href="{% url 'user:login' %}" class="btn btn-primary">Login</a>

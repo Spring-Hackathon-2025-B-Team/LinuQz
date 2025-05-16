@@ -1,0 +1,179 @@
+/* 共通 */
+html{
+    background-image:url(../images/background.jpg);
+    background-size: cover;
+}
+
+body {
+    background-color: white;
+    margin: 0 auto;
+    width: 1040px;
+    height: 100vh;
+    font-family: sans-serif;
+    border: 1px black solid;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+/* ヘッダー部分 */
+header {
+    width:1000px;
+    margin:0 auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #38b6ff;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.logo{
+}
+
+.logout{
+    font-size:24px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.logout a{
+    color:white;
+}
+
+
+/* 認証関係 */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.auth-box{
+    margin-top:150px;
+    width:600px;
+    height: 450px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #D7EEFF;
+    border-radius: 8px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.auth-box p{
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.input_item{
+    font-size:22px;
+    font-weight: bold;
+}
+
+.input_item_text{
+    height:30px;
+    font-size:22px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+}
+
+.moving_link{
+    margin-top:20px;
+    font-size:22px;
+    font-weight: bold;
+    color:#3C58D6;
+}
+
+
+/* トップ画面 */
+.user_info{
+    margin-top: 80px;
+    margin-right: 100px;
+    color:black;
+    font-size:22px;
+    font-weight: bold;
+    text-align: right;
+    position: relative;
+}
+
+.account_icon{
+    position: absolute;
+    top:0px;
+}
+
+.chara_icon{
+    position: absolute;
+    top:-10px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 80px; /* ボックス間のスペース */
+    margin-top: 50px;
+}
+
+.box {
+    width: 350px;
+    height: 480px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column; /* 子要素を縦に並べる（デフォルトは横（row）） */
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #D7EEFF;
+    border-radius: 8px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.box p{
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+/* 各種ボタン */
+button {
+    width: 200px;
+    height: 70px;
+    padding: 8px 16px;
+    margin-top:20px;
+    font-size: 24px;
+    font-weight: bold;
+    color:white;
+    background-color:#3E8FE6;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.button_login{
+    margin-top:30px;
+    margin-left:90px;
+}
+
+.button_Beginner{
+    background-color:#5C73DB;
+}
+
+.button_Intermediate{
+    background-color:#3C58D6;
+}
+
+.button_Advanced{
+    background-color:#223DB6;
+}

@@ -1,27 +1,69 @@
-<!DOCTYPE html>
+{% load static %}
+<!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Bootstrap5のCDNを設定 -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-    <title>LiniQz</title>
-  </head>
 
-  <body>
-    <div class="container mx-auto text-center">
-      {% block title %} {% endblock %} {% block content %} {% endblock %}
-    </div>
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>LinuQz | {% block title %}{% endblock title %}</title>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/stylesheets.css' %}">
+        <link rel="icon" href="{% static 'images/favicon.ico' %}">
+    </head>
+
+    <body>
+
+        <header>
+            <!-- アプリロゴ表示（押下するとトップ画面へ） -->
+            <div class="logo">
+                <a href="{% url 'home:index' %}">
+                    <img src="{% static 'images/logo.png' %}" width="230" height="60">
+                </a>
+            </div>
+            
+            <!-- ログアウト（押下するとログイン画面へ） -->
+            <!-- ログアウトはPOST処理が必要、かつボタンではなくaタグを使いたいので、Javascriptの仕組みでform起動している -->
+            <form id="logout-form" action="{% url 'user:logout' %}" method="post" style="display: none;">
+                {% csrf_token %}
+            </form>
+            <div class="logout">
+                <!-- ログインしている場合のみ表示 -->
+                {% if user.is_authenticated %}
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        ログアウト
+                    </a>
+                {% endif %}
+            </div>
+    
+        </header>
+
+        <!-- ログインしている場合のみ表示 -->
+        {% if user.is_authenticated %}
+
+            <div class="user_info">
+                ユーザ名：{{ user.name }}
+
+                <!-- アカウント編集 -->
+                <a href="{% url 'home:account' %}">
+                    <img src="{% static 'images/user_edit.png' %}" width="30" height="30" class="account_icon">
+                </a>
+        
+                <!-- レベルとアイコン表示（レベルに応じてアイコンを出し分け） -->
+                　　　Lv.{{ user.level }}　
+                {% if user.level == 1 %}
+                    <img src="{% static 'images/level1.png' %}" width="55" height="55" class="chara_icon">
+                {% elif user.level == 2 %}
+                    <img src="{% static 'images/level2.png' %}" width="55" height="55" class="chara_icon">
+                {% elif user.level == 3 %}
+                    <img src="{% static 'images/level3.png' %}" width="55" height="55" class="chara_icon">
+                {% elif user.level == 4 %}
+                    <img src="{% static 'images/level4.png' %}" width="55" height="55" class="chara_icon">
+                {% elif user.level == 5 %}
+                    <img src="{% static 'images/level5.png' %}" width="55" height="55" class="chara_icon">
+                {% endif %}            
+            </div>
+        {% endif %}
+
+        {% block content %}{% endblock content %}
+    </body>
 </html>

@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.user.apps.UserConfig'
+    'apps.user.apps.UserConfig',
+    'apps.home.apps.HomeConfig',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +122,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# アプリ外の共通staticディレクトリ読込に必要
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -129,6 +134,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.User'
 
-LOGIN_REDIRECT_URL = "user:home"
+# ログインしていない場合、どのページにアクセスしても必ずこのURLにリダイレクトされる
+LOGIN_URL = '/user/login/'
+
+LOGIN_REDIRECT_URL = "home:index"
 
 LOGOUT_REDIRECT_URL = "user:login"

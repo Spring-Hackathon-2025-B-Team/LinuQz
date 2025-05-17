@@ -3,6 +3,45 @@
 
 {% block content %}
 
-    <h1>問題一覧</h1>
+    <div class="question_container">
 
+        <h1>問題一覧</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th width="50px">ランク</th>
+                    <th width="300px">問題</th>
+                    <th width="130px">更新日時</th>
+                    <th width="50px">編集</th>
+                    <th width="50px">削除</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for question in questions %}
+                    <tr>
+                        <td>
+                            {% if question.rank_id == 1 %}
+                                {{ RANK_1_NAME }}
+                            {% elif question.rank_id == 2 %}
+                                {{ RANK_2_NAME }}
+                            {% endif %}
+                        </td>
+                        <td class="td_item_left">{{ question.question }}</td>
+                        <td>{{ question.updated_at|date:"Y年n月j日 G時i分" }}</td>
+                        <td>
+                            <a href="#" class="button_edit">
+                                編集
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="button_delete">
+                                削除
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock content %}

@@ -18,6 +18,28 @@ a{
     text-decoration: none;
 }
 
+table{
+    width: 900px;
+    border: 1px solid gray;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    margin:30px auto;
+}
+
+th, td {
+    border: 1px solid gray;
+}
+
+th{
+    background-color: #C2EEFF;
+}
+
+.td_item_left{
+    text-align: left;
+}
+
 
 /* ヘッダー部分 */
 header {
@@ -150,7 +172,6 @@ header {
 /* 問題管理画面 */
 
 .question_container{
-    width: 500px;
     margin:50px auto;
 }
 
@@ -159,9 +180,10 @@ header {
 }
 
 .question_create_area{
+    width:330px;
     font-size: 20px;
     font-weight: bold;
-    margin-left:100px;
+    margin:0 auto;
 }
 
 
@@ -199,5 +221,31 @@ button {
 
 .button_update{
     margin-top:30px;
-    margin-left:120px;
+    margin-left:410px;
+}
+
+.button_edit{
+    display: block;
+    width: 60px;
+    height: 25px;
+    margin:10px auto;
+    border: 1px solid black;
+    box-shadow: 1px 1px 1px black;
+    background-color: #5D99FF;
+    font-size:17px;
+    font-weight: bold;
+    color:black;
+}
+
+.button_delete{
+    display: block;
+    width: 60px;
+    height: 25px;
+    margin:auto;
+    border: 1px solid black;
+    box-shadow: 1px 1px 1px black;
+    background-color: #BBBBBB;
+    font-size:17px;
+    font-weight: bold;
+    color:black;
 }

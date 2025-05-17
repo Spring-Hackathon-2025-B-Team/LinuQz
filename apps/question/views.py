@@ -7,7 +7,15 @@ from django.conf import settings
 # 問題一覧画面
 @login_required
 def index_view(request):
-    return render(request, 'question/index.html')
+
+    # 問題テーブルから全レコード取得(更新日時の降順)
+    questions = Question.objects.all().order_by('-updated_at')
+
+    return render(request, "question/index.html", {
+        'questions': questions,
+        'RANK_1_NAME': settings.RANK_1_NAME,
+        'RANK_2_NAME': settings.RANK_2_NAME,
+    })
 
 # 問題作成画面
 @login_required

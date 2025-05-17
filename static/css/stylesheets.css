@@ -82,9 +82,9 @@ header {
 }
 
 .auth-box{
-    margin-top:150px;
+    margin-top:100px;
     width:600px;
-    height: 450px;
+    height: 700px;
     border: 2px solid black;
     display: flex;
     flex-direction: column;
@@ -143,6 +143,7 @@ header {
 }
 
 .container {
+    height: 600px;
     display: flex;
     justify-content: center;
     gap: 80px; /* ボックス間のスペース */
@@ -209,11 +210,6 @@ button {
     cursor: pointer;
     border-radius: 8px;
     box-shadow: 2px 2px 2px black;
-}
-
-.button_login{
-    margin-top:30px;
-    margin-left:90px;
 }
 
 .button_Beginner{

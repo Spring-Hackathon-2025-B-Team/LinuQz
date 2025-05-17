@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Question
 from .forms import QuestionForm
@@ -37,5 +37,8 @@ def edit_view(request):
 
 # 問題削除（画面なし）
 @login_required
-def delete_view(request):
+def delete_view(request,pk):
+    # 該当レコードがなければ404エラーを返す
+    question = get_object_or_404(Question, pk=pk)
+    question.delete()
     return redirect('question:index') 

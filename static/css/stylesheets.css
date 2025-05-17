@@ -224,6 +224,22 @@ button {
     margin-left:410px;
 }
 
+.button_create{
+    display: block;
+    width: 185px;
+    height: 28px;
+    float: right;
+    margin-bottom:10px;
+    margin-right:72px;
+    border: 1px solid black;
+    box-shadow: 1px 1px 1px black;
+    background-color: #005FFF;
+    text-align: center;
+    font-size:17px;
+    font-weight: bold;
+    color:white;
+}
+
 .button_edit{
     display: block;
     width: 60px;
@@ -231,7 +247,7 @@ button {
     margin:10px auto;
     border: 1px solid black;
     box-shadow: 1px 1px 1px black;
-    background-color: #5D99FF;
+    background-color: #8EB8FF;
     font-size:17px;
     font-weight: bold;
     color:black;

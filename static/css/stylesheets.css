@@ -179,6 +179,15 @@ header {
     text-align: center;
 }
 
+.question-area{
+    margin:0 auto;
+    width:600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .question_create_area{
     width:330px;
     font-size: 20px;
@@ -220,8 +229,8 @@ button {
 }
 
 .button_update{
-    margin-top:30px;
-    margin-left:410px;
+    margin-left:65px;
+    margin-bottom: 20px;
 }
 
 .button_create{

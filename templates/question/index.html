@@ -34,7 +34,7 @@
                         <td class="td_item_left">{{ question.question }}</td>
                         <td>{{ question.updated_at|date:"Y年n月j日 G時i分" }}</td>
                         <td>
-                            <a href="#" class="button_edit">
+                            <a href="{% url 'question:edit' question.pk %}" class="button_edit">
                                 編集
                             </a>
                         </td>

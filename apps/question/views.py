@@ -32,8 +32,19 @@ def create_view(request):
 
 # 問題編集画面
 @login_required
-def edit_view(request):
-    return render(request, 'question/edit.html')
+def edit_view(request,pk):
+    # 該当レコードがなければ404エラーを返す
+    question = get_object_or_404(Question, pk=pk)
+
+    if request.method == 'POST':
+        form = QuestionForm(request.POST, instance=question)
+        if form.is_valid():
+            form.save()
+            return redirect('question:index') 
+    else:
+        form = QuestionForm(instance=question)
+
+    return render(request, 'question/edit.html', {'form': form, 'question': question})
 
 # 問題削除（画面なし）
 @login_required

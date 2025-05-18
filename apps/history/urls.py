@@ -1,8 +1,10 @@
-from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from .views import RankingList
+
 
 app_name = "history"
 
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('ranking/', RankingList.as_view(), name="ranking")
 ]

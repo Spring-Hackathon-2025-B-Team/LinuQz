@@ -1,0 +1,20 @@
+<h2>初級</h2>
+<ul>
+  {% for item in ranking_BEGINNER %}
+  <li>{{ item.user.name }} - {{ item.score }}</li>
+  {% endfor %}
+</ul>
+
+<h2>中級</h2>
+<ul>
+  {% for item in ranking_INTERMEDIATE %}
+  <li>{{ item.user.name }} - {{ item.score }}</li>
+  {% endfor %}
+</ul>
+
+<h2>上級</h2>
+<ul>
+  {% for item in ranking_ADVANCED %}
+  <li>{{ item.user.name }} - {{ item.score }}</li>
+  {% endfor %}
+</ul>

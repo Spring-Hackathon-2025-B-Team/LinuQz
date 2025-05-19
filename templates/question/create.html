@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}問題作成{% endblock %}
+
+{% block content %}
+
+    <div class="question_container">
+        <div class="question-area">
+
+            <h1>問題作成</h1>
+
+            <form method="post">
+                {% csrf_token %}
+
+                {% for field in form %}
+                    <div class="question_create_area">
+                        <label for="{{ field.id_for_label }}" class="form-label">
+                            {{ field.label }}
+                        </label>
+                        <br>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger small">
+                                {{ field.errors.as_text }}
+                            </div>
+                        {% endif %}
+                        <br><br>
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="button_update">登録</button>
+            </form>
+
+            <a href="{% url 'question:index' %}" class="moving_link">
+                    問題一覧に戻る
+            </a>
+        </div>
+    </div>
+{% endblock content %}

@@ -7,14 +7,37 @@ html{
 body {
     background-color: white;
     margin: 0 auto;
+    margin-bottom: 30px;
     width: 1040px;
-    height: 100vh;
+    height: auto;
     font-family: sans-serif;
     border: 1px black solid;
 }
 
 a{
     text-decoration: none;
+}
+
+table{
+    width: 900px;
+    border: 1px solid gray;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    margin:30px auto;
+}
+
+th, td {
+    border: 1px solid gray;
+}
+
+th{
+    background-color: #C2EEFF;
+}
+
+.td_item_left{
+    text-align: left;
 }
 
 
@@ -59,9 +82,9 @@ header {
 }
 
 .auth-box{
-    margin-top:150px;
+    margin-top:100px;
     width:600px;
-    height: 450px;
+    height: 700px;
     border: 2px solid black;
     display: flex;
     flex-direction: column;
@@ -120,6 +143,7 @@ header {
 }
 
 .container {
+    height: 600px;
     display: flex;
     justify-content: center;
     gap: 80px; /* ボックス間のスペース */
@@ -146,6 +170,33 @@ header {
 }
 
 
+/* 問題管理画面 */
+
+.question_container{
+    margin:50px auto;
+}
+
+.question_container h1{
+    text-align: center;
+}
+
+.question-area{
+    margin:0 auto;
+    width:600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.question_create_area{
+    width:330px;
+    font-size: 20px;
+    font-weight: bold;
+    margin:0 auto;
+}
+
+
 /* 各種ボタン */
 button {
     width: 200px;
@@ -161,11 +212,6 @@ button {
     box-shadow: 2px 2px 2px black;
 }
 
-.button_login{
-    margin-top:30px;
-    margin-left:90px;
-}
-
 .button_Beginner{
     background-color:#5C73DB;
 }
@@ -176,4 +222,51 @@ button {
 
 .button_Advanced{
     background-color:#223DB6;
+}
+
+.button_update{
+    margin-left:65px;
+    margin-bottom: 20px;
+}
+
+.button_create{
+    display: block;
+    width: 185px;
+    height: 28px;
+    float: right;
+    margin-bottom:10px;
+    margin-right:72px;
+    border: 1px solid black;
+    box-shadow: 1px 1px 1px black;
+    background-color: #005FFF;
+    text-align: center;
+    font-size:17px;
+    font-weight: bold;
+    color:white;
+}
+
+.button_edit{
+    display: block;
+    width: 60px;
+    height: 25px;
+    margin:10px auto;
+    border: 1px solid black;
+    box-shadow: 1px 1px 1px black;
+    background-color: #8EB8FF;
+    font-size:17px;
+    font-weight: bold;
+    color:black;
+}
+
+.button_delete{
+    display: block;
+    width: 60px;
+    height: 25px;
+    margin:auto;
+    border: 1px solid black;
+    box-shadow: 1px 1px 1px black;
+    background-color: #BBBBBB;
+    font-size:17px;
+    font-weight: bold;
+    color:black;
 }

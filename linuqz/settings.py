@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.user.apps.UserConfig',
     'apps.home.apps.HomeConfig',
+    'apps.question.apps.QuestionConfig',
     'apps.history.apps.HistoryConfig',
 ]
 
@@ -141,3 +142,11 @@ LOGIN_URL = '/user/login/'
 LOGIN_REDIRECT_URL = "home:index"
 
 LOGOUT_REDIRECT_URL = "user:login"
+
+# ランクに関する定数
+RANK_1_NAME = '選択'
+RANK_1_CORRECT_POINT = 10
+RANK_1_INCORRECT_POINT = -5
+RANK_2_NAME = '記述'
+RANK_2_CORRECT_POINT = 20
+RANK_2_INCORRECT_POINT = -10

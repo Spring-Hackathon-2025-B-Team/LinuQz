@@ -11,12 +11,18 @@
                 {% csrf_token %}
 
                 <div class="input_item">
-                    {{ form.username.label_tag }} 　{{ form.username }}
+                    {{ form.username.label_tag }}
+                    <br>
+                    {{ form.username }}
                 </div>
+                <br>
               
                 <div class="input_item">
-                    {{ form.password.label_tag }} 　　　{{ form.password }}
+                    {{ form.password.label_tag }}
+                    <br>
+                    {{ form.password }}
                 </div>
+                <br>
 
                 {% if form.non_field_errors %} 
                     {% for error in form.non_field_errors %}

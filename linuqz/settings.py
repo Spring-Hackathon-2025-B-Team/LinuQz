@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'apps.user.apps.UserConfig',
     'apps.home.apps.HomeConfig',
     'apps.question.apps.QuestionConfig',
+    'apps.history.apps.HistoryConfig',
 ]
 
 MIDDLEWARE = [

@@ -4,12 +4,15 @@
 {% block content %}
 
     <div class="container">
-        <div class="box">
-            <p>問題にチャレンジ！</p>
-            <button class="button_Beginner">初級編</button>
-            <button class="button_Intermediate">中級編</button>
-            <button class="button_Advanced">上級編</button>
-        </div>
+        <form method="get" action="{% url 'play:start' %}">
+            <div class="box">
+                <p>問題にチャレンジ！</p>
+                <div class="button_area">
+                    <button class="button_choice" name="rank" value="choice">選択問題</button>
+                </div>
+                <button class="button_input" name="rank" value="input">記述問題</button>
+            </div>
+        </form>
         <div class="box">
             <p>実績</p>
             <button>ランキング</button>

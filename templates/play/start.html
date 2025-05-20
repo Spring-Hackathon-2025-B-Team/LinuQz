@@ -2,4 +2,35 @@
 {% block title %}問題開始{% endblock %}
 
 {% block content %}
+
+    <div class="container">
+
+        <div class="question-box">
+
+            <div class="question-area">
+                {% if rank == "choice" %}
+                    <p>Linuxコマンドに関する4択の問題を10問出題します。<br>
+                        60秒の時間制限があり、残り時間がボーナスポイントになります。<br>
+                        ただし間違えるとマイナスポイントとなるので、落ち着いて正解を選びましょう。
+                    </p>
+                {% elif rank == "input" %}
+                    <p>記述問題の説明を記載<br>
+                        記述問題の説明を記載<br>
+                        記述問題の説明を記載
+                    </p>
+                {% endif %}
+            </div>
+
+            <form method="get" action="{% url 'play:question_init' %}">
+                <button class="button_start">{{ rank_display }}問題を開始する</button>
+                <input type="hidden" name="rank" value="{{ rank }}">
+            </form>
+
+            <a href="{% url 'home:index' %}">
+                <button class="button_return">トップページに戻る</button>
+            </a>
+        </div>
+
+    </div>
+
 {% endblock content %}

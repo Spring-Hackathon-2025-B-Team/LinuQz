@@ -3,7 +3,18 @@ from django.shortcuts import render, redirect
 
 # 問題開始画面
 def start_view(request):
-    return render(request, 'play/start.html')
+
+    rank = request.GET.get('rank', 'choice')
+
+    context = {
+        'rank': rank,
+        'rank_display': {
+            'choice': '選択',
+            'input': '記述'
+        }.get(rank, '選択')
+    }
+
+    return render(request, 'play/start.html', context)
 
 
 # 初期化処理（問題開始時に1度だけ実施）

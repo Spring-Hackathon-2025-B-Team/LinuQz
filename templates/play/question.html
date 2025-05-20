@@ -2,4 +2,98 @@
 {% block title %}問題実施{% endblock %}
 
 {% block content %}
+
+    <!-- 進捗バーと残り時間の表示 -->
+    <div class="timer-area">
+
+        <!-- 進捗バーの表示 -->
+        <div id="timer-bar">
+            <div id="timer-fill"></div>
+        </div>
+
+        <!-- 残り時間の表示 -->
+        <div class="remaining_time">
+            <p>残り時間：<span id="countdown"></span> 秒</p>    
+        </div>
+    </div>
+
+    <!-- 問題と選択肢の表示 -->
+    <div class="question-area">
+        【問題 {{ number }}】
+        <br>
+        {{ question_obj.question|linebreaksbr  }}
+    </div>
+
+    <form id="question-form" method="post">
+        {% csrf_token %}
+
+        <input type="hidden" name="choice" id="choice-input">
+        <div class="choices">
+            {% for i, choice in choices %}
+                <div class="choice" onclick="submitChoice('{{ choice }}')">
+                    {% if i == 0 %}
+                        ①　 {{ choice }}
+                    {% elif i == 1 %}
+                        ②　 {{ choice }}
+                    {% elif i == 2 %}
+                        ③　 {{ choice }}
+                    {% elif i == 3 %}
+                        ④　 {{ choice }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    
+    </form>
+
+    <script>
+
+        // 選択肢を押下したときの処理
+        function submitChoice(choiceIndex) {
+
+            // 押下した選択肢（=ユーザ回答）を取得
+            document.getElementById("choice-input").value = choiceIndex;
+
+            // フォーム送信し、次の問題へ
+            document.getElementById("question-form").submit();
+        }
+
+        const timeLimit = '{{ TIME_LIMIT }}'; // 制限時間（秒）
+        const startedAt = new Date("{{ start_time_js|safe }}"); // サーバから渡された開始時間
+        const fillEl = document.getElementById("timer-fill"); // 進捗バー表示用のhtml要素を取得
+        const countdownEl = document.getElementById("countdown"); // 残り時間表示用のhtml要素を取得
+
+        function updateTimer(){
+
+            const now = new Date(); // 現在の時刻を取得
+            const elapsed = (now - startedAt) / 1000; // 経過時間を取得（現在の時刻-開始時刻）
+            const remainingTime = Math.max(0, timeLimit - elapsed); // 残り時間を取得（制限時間-経過時間）
+
+            const percent = (remainingTime / timeLimit) * 100 - 1; // 残り時間の割合を取得（残り時間/制限時間）
+            fillEl.style.width = percent + "%"; // 残り時間の割合を進捗バーのcss(width)に反映
+            remainingTimePerSecond = Math.ceil(remainingTime); // 残り時間を整数に変換
+            countdownEl.textContent = remainingTimePerSecond; // 残り時間を画面に表示
+
+            // 残り時間が10秒以内になったら進捗バーのcssを更新（赤色にする）
+            if (remainingTimePerSecond <= 10) {
+                fillEl.classList.add("danger");
+            }
+
+            // 残り時間が0秒以下になったら強制終了
+            if (remainingTimePerSecond <= 0) {
+                fillEl.style.width = "0%";
+                countdownEl.textContent = 0;                
+                clearInterval(timerInterval); // setIntervalの停止
+                window.location.href = "{% url 'play:result_force' %}";
+            }
+        }
+
+        // 最初に1回、即更新する（進捗バーの見栄え改善）
+        updateTimer();
+
+        // 100ms(0.1秒)毎にupdateTimer関数を実行
+        const timerInterval = setInterval(updateTimer, 100);
+
+    </script>
+
 {% endblock content %}

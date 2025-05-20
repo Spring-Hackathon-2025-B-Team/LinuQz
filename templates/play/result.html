@@ -2,4 +2,81 @@
 {% block title %}結果{% endblock %}
 
 {% block content %}
+
+    <div class="result-box">
+        <div class="point_total" style="white-space:nowrap;" >
+            あなたの得点は<span style="color:red;">{{ score }}</span>点です！
+        </div>
+        <br>
+        <div class="point_detail">
+            {% if rank == "choice" %}
+                {% if score > 0 %}
+                    ●正解：{{ correct_count }}問 × {{ RANK_1_CORRECT_POINT }}点 = {{ correct_point }}点<br>
+                    ●不正解：{{ incorrect_count }}問 × {{ RANK_1_INCORRECT_POINT }}点 = {{ incorrect_point }}点<br>
+                    ●残り時間ボーナス：{{ remaining_time }}点
+                {% endif %}
+            {% elif rank == "write" %}
+                {% if score > 0 %}
+                    ●正解：{{ correct_count }}問 × {{ RANK_2_CORRECT_POINT }}点 = {{ correct_point }}点<br>
+                    ●不正解：{{ incorrect_count }}問 × {{ RANK_2_INCORRECT_POINT }}点 = {{ incorrect_point }}点<br>
+                    ●残り時間ボーナス：{{ remaining_time }}点
+                {% endif %}
+            {% endif %}
+        </div>
+        <br>
+        <div class="title_name">
+            {% if score > 80 %}
+                称号：コマンドスペシャリスト
+            {% elif score > 60 %}
+                称号：コマンド上級者
+            {% elif score > 40 %}
+                称号：コマンド中級者
+            {% elif score > 20 %}
+                称号：コマンド初級者
+            {% else %}
+                称号：コマンド見習い
+            {% endif %}
+        </div>
+    </div>
+
+    <table class="">
+        <thead class="">
+            <tr width="700px">
+                <th width="30px">問題</th>
+                <th width="200px">正解</th>
+                <th width="200px">あなたの回答</th>
+                <th width="30px">正誤</th>
+                <th width="100px">問題と解説</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in results %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td class="td_item_left">　{{ r.answer }}</td>
+                    <td class="td_item_left">　{{ r.user_answer }}</td>
+                    <td>
+                        {% if r.is_correct %}
+                            <span class="correct_mark">○</span>
+                        {% else %}
+                            <span class="incorrect_mark">×</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="#">
+                            <button class="button_answer">問題と解説を見る</button>
+                        </a>
+                    </td>
+        
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="container_temp">
+        <a href="{% url 'home:index' %}">
+            <button class="button_return">トップページに戻る</button>
+        </a>
+    </div>
+
 {% endblock content %}

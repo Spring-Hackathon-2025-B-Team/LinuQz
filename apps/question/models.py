@@ -44,3 +44,6 @@ class Question(models.Model):
     class Meta:
         #明示的にテーブル名を指定
         db_table = 'questions'
+
+    def get_choices(self):
+        return [self.choice_1, self.choice_2, self.choice_3, self.choice_4]

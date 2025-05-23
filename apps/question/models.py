@@ -24,10 +24,10 @@ class Question(models.Model):
     question = models.TextField(max_length=255,null=False,blank=False)
 
     # 選択肢1～4
-    choice_1 = models.CharField(max_length=50)
-    choice_2 = models.CharField(max_length=50)
-    choice_3 = models.CharField(max_length=50)
-    choice_4 = models.CharField(max_length=50)
+    choice_1 = models.CharField(max_length=50,blank=True, null=True)
+    choice_2 = models.CharField(max_length=50,blank=True, null=True)
+    choice_3 = models.CharField(max_length=50,blank=True, null=True)
+    choice_4 = models.CharField(max_length=50,blank=True, null=True)
 
     # 解答
     answer = models.CharField(max_length=50,null=False,blank=False)

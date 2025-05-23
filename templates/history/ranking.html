@@ -11,7 +11,9 @@
         </div>
         
         <div class="tab-content active">
-            <h1>～ランキング（選択問題）～</h1>
+            <div class="ranking_title">
+                <p>～ランキング（選択問題）～</p>
+            </div>
             <table class="ranking_table">
                 <thead>
                     <tr>
@@ -55,8 +57,50 @@
             </table>
         </div>
         <div class="tab-content">
-            <h2>ランキング（記述問題）</h2>
-            <p>これは中級編の中身です。</p>
+            <div class="ranking_title">
+                <p>～ランキング（記述問題）～</p>
+            </div>
+            <table class="ranking_table">
+                <thead>
+                    <tr>
+                        <th width="30px" class="ranking_th"></th>
+                        <th width="30px" class="ranking_th">順位</th>
+                        <th width="100px" class="ranking_th">ユーザ名</th>
+                        <th width="30px" class="ranking_th">得点</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in ranking_INPUT %}
+                        <tr height="72">
+
+                            {% if item.ranking == 1 %}
+                                <td class="ranking_td"><img src="{% static 'images/gold.png' %}" width="40" height="30"></td>
+                            {% elif item.ranking == 2 %}
+                                <td class="ranking_td"><img src="{% static 'images/silver.png' %}" width="40" height="30"></td>
+                            {% elif item.ranking == 3 %}
+                                <td class="ranking_td"><img src="{% static 'images/bronze.png' %}" width="40" height="30"></td>
+                            {% else %}
+                                <td class="ranking_td"></td>
+                            {% endif %}
+                          
+                            {% if item.ranking == 1 %}
+                                <td class="ranking_td color_gold">{{ item.ranking }}位</td>
+                            {% elif item.ranking == 2 %}
+                                <td class="ranking_td color_silver">{{ item.ranking }}位</td>
+                            {% elif item.ranking == 3 %}
+                                <td class="ranking_td color_bronze">{{ item.ranking }}位</td>
+                            {% else %}
+                                <td class="ranking_td">{{ item.ranking }}位</td>
+                            {% endif %}
+
+                            <td class="ranking_td">　{{ item.history.user_id.name }}</td>
+
+                            <td class="ranking_td">{{ item.history.score }}</td>
+
+                          </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 

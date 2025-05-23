@@ -222,6 +222,24 @@ header {
     margin:0 auto;
 }
 
+.rank_choice_design{
+    border:1px solid black;
+    border-radius: 5px;
+    background-color: #5C73DB;
+    padding: 5px 5px;
+    color:white;
+    font-weight: bold;
+}
+
+.rank_input_design{
+    border:1px solid black;
+    border-radius: 5px;
+    background-color: #223DB6;
+    padding: 5px 5px;
+    color:white;
+    font-weight: bold;
+}
+
 
 /* 問題実施画面 */
 .question-box {
@@ -245,6 +263,23 @@ header {
     margin: 20px auto;
     margin-top: 20px;
     box-shadow: 2px 2px 2px black;
+}
+
+.explanation-area{
+    border: 4px double #333;
+    height: auto;
+    width: 700px;
+    background-color: #f5f5f5;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    margin: 10px auto;
+    padding:20px 20px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.question-text{
+    background-color: #EEFFFF;
 }
 
 .timer-area{
@@ -309,6 +344,20 @@ header {
     background-color: #5C73DB;
 }
 
+.command_input{
+    width: 600px;
+    text-align: center;
+    margin: 30px auto;
+    font-size:24px;
+    font-weight: bold;
+}
+
+.command_input_area{
+    width: 400px;
+    height: 30px;
+    font-size:26px;
+}
+
 .point_total{
     font-size: 28px;
 }
@@ -370,19 +419,6 @@ header {
     align-items: center;
     margin-top:30px;
     padding-bottom:60px;
-}
-
-.explanation-area{
-    border: 4px double #333;
-    height: auto;
-    width: 700px;
-    background-color: #f5f5f5;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: left;
-    margin: 10px auto;
-    padding:20px 20px;
-    box-shadow: 2px 2px 2px black;
 }
 
 .choice_answer {
@@ -462,6 +498,18 @@ header {
     display: block;
 }
 
+.ranking_title{
+    width: 700px;
+    height: 60px;
+    margin: 10px auto;
+    line-height: 1px;
+    font-size: 30px;
+    font-weight: bold;
+    border: 1px solid #AAFFFF;
+    border-radius: 10px;
+    background-color: #DDFFFF;
+}
+
 .ranking_table{
     width:750px;
     border: none !important;
@@ -498,6 +546,7 @@ header {
 button{
     width: 200px;
     height: 70px;
+    margin: 0px auto;
     padding: 8px 16px;
     background-color:#3E8FE6;
     cursor: pointer;
@@ -506,6 +555,10 @@ button{
     font-size: 24px;
     font-weight: bold;
     color:white;
+    text-align: center;
+}
+
+.button-center{
     text-align: center;
 }
 
@@ -527,21 +580,19 @@ button{
     background-color:#223DB6;
 }
 
-.button_update{
-    margin-bottom: 20px;
-}
-
 .button_create{
     display: block;
     width: 185px;
     height: 28px;
     float: right;
     margin-bottom:10px;
-    margin-right:72px;
+    margin-right:87px;
     border: 1px solid black;
     box-shadow: 1px 1px 1px black;
     background-color: #005FFF;
     font-size:17px;
+    color:white;
+    text-align: center;
 }
 
 .button_edit{
@@ -576,9 +627,9 @@ button{
     margin-bottom:30px;
 }
 
-
 .button_return{
-    margin-top: 30px;
+    margin-top: 50px;
+    margin-bottom: 20px;
     width: 220px;
     height: 50px;
     font-size: 20px;

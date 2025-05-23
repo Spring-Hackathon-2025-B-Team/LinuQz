@@ -17,7 +17,7 @@
                         ●不正解：{{ incorrect_count }}問 × {{ RANK_1_INCORRECT_POINT }}点 = {{ incorrect_point }}点<br>
                         ●残り時間ボーナス：{{ remaining_time }}点
                     {% endif %}
-                {% elif rank == "write" %}
+                {% elif rank == "input" %}
                     {% if score > 0 %}
                         ●正解：{{ correct_count }}問 × {{ RANK_2_CORRECT_POINT }}点 = {{ correct_point }}点<br>
                         ●不正解：{{ incorrect_count }}問 × {{ RANK_2_INCORRECT_POINT }}点 = {{ incorrect_point }}点<br>

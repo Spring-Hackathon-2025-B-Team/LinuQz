@@ -120,7 +120,10 @@ def question_view(request):
     if request.method == "POST":
 
         # 選択した内容（回答）を取得
-        selected = request.POST.get("choice")
+        if rank == "choice":
+            selected = request.POST.get("choice")
+        elif rank == "input":
+            selected = request.POST.get("input")
 
         # 選択した内容（回答）をユーザ回答配列に格納
         request.session["user_answers"].append(selected)
@@ -138,8 +141,9 @@ def question_view(request):
     # ランクが「choice（選択問題）」の場合
     if(rank == "choice"):
 
-        # 問題実施画面を表示
+        # 問題実施画面（選択問題用）を表示
         return render(request, "play/question.html", {
+            "rank": rank,  # ランク
             "number": current + 1,  # 問題番号
             "question_obj": question_obj,  # 問題
             "choices": enumerate(question_obj.get_choices()),  # 選択肢の配列
@@ -148,8 +152,16 @@ def question_view(request):
         })
 
     # ランクが「input（記述問題）」の場合
-    # if(rank == "input"):
-        # 問題実施画面（記述用）を表示
+    if(rank == "input"):
+
+        # 問題実施画面（記述問題用）を表示
+        return render(request, "play/question.html", {
+            "rank": rank,  # ランク
+            "number": current + 1,  # 問題番号
+            "question_obj": question_obj,  # 問題
+            "TIME_LIMIT": settings.TIME_LIMIT,  # 制限時間
+            "start_time_js": request.session.get("start_time"),  # 開始時刻
+        })
 
 
 # 結果画面
@@ -281,7 +293,7 @@ def result_force(request):
     return redirect("play:result")
 
 
-# 解答画面
+# 解説画面
 def answer_view(request,pk):
 
     question = get_object_or_404(Question, pk=pk)

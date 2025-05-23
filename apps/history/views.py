@@ -20,6 +20,8 @@ class RankingList(ListView):
         """
 
         context = super().get_context_data(**kwargs)
+
+        # 選択問題のランキングデータ抽出
         choice_histories = History.objects.select_related('user_id').filter(rank_id=1).order_by('-score')[:5]
     
         choice_ranking = []
@@ -39,5 +41,24 @@ class RankingList(ListView):
 
         context['ranking_CHOICE'] = choice_ranking
 
-        context['ranking_INPUT'] = History.objects.select_related('user_id').filter(rank_id=2).order_by('-score')[:5]
+        # 記述問題のランキングデータ抽出
+        input_histories = History.objects.select_related('user_id').filter(rank_id=2).order_by('-score')[:5]
+
+        input_ranking = []
+        prev_score = None
+        ranking = 0
+        count = 0 
+
+        for h in input_histories:
+            count += 1
+            if h.score != prev_score:
+                ranking = count
+                prev_score = h.score
+            input_ranking.append({
+                'ranking': ranking,
+                'history': h,
+            })
+
+        context['ranking_INPUT'] = input_ranking
+
         return context

@@ -3,35 +3,39 @@
 
 {% block content %}
 
-    <div class="container">
+    <div class="standart-box">
 
-        <div class="question-box">
-
-            <div class="question-area">
-                {% if rank == "choice" %}
-                    <p>～ルール説明～<br>
-                        Linuxコマンドに関する4択の問題を{{ NUMBER_OF_QUESTIONS }}問出題します。<br>
-                        {{ TIME_LIMIT }}秒の時間制限があり、残り時間がボーナスポイントになります。<br>
-                        ただし間違えるとマイナスポイントとなるので、落ち着いて正解を選びましょう。
-                    </p>
-                {% elif rank == "input" %}
-                    <p>記述問題の説明を記載<br>
-                        記述問題の説明を記載<br>
-                        記述問題の説明を記載
-                    </p>
-                {% endif %}
-            </div>
-
-            <form method="get" action="{% url 'play:question_init' %}">
-                <button class="button_start">{{ rank_display }}問題を開始する</button>
-                <input type="hidden" name="rank" value="{{ rank }}">
-            </form>
-
-            <a href="{% url 'home:index' %}">
-                <button class="button_return">トップページに戻る</button>
-            </a>
+        <div class="explanation-area">
+            {% if rank == "choice" %}
+                <p>～ルール説明～<br>
+                    ●問題文に従い、正しいLinuxコマンドを4択から選択してください。<br>
+                    ●問題は全部で{{ NUMBER_OF_QUESTIONS }}問出題されます。<br>
+                    ●制限時間は{{ TIME_LIMIT }}秒です。残り時間はボーナスポイントになります。<br>
+                    ●誤答はマイナスポイントとなるので、落ち着いて正解を選びましょう。
+                </p>
+            {% elif rank == "input" %}
+                <p>～ルール説明～<br>
+                    ●問題文に従い、正しいLinuxコマンドを入力してください。<br>
+                    ●問題は全部で{{ NUMBER_OF_QUESTIONS }}問出題されます。<br>
+                    ●制限時間は{{ TIME_LIMIT }}秒です。残り時間はボーナスポイントになります。<br>
+                    ●誤答はマイナスポイントとなるので、落ち着いて入力しましょう。<br>
+                    ●当アプリの仕様上、正解コマンドと完全一致しないと不正解となります。<br>
+                    　あらかじめご了承ください。<br>
+                    　※実際は「書き方が微妙に違うけど挙動は同じ」といった<br>
+                    　　コマンドもあるので、当アプリでの正解コマンドが100%正しい、<br>
+                    　　というわけではございません。お含みおきください。<br>
+                </p>
+            {% endif %}
         </div>
 
+        <form method="get" action="{% url 'play:question_init' %}">
+            <button class="button_start">{{ rank_display }}問題を開始する</button>
+            <input type="hidden" name="rank" value="{{ rank }}">
+        </form>
+
+        <a href="{% url 'home:index' %}">
+            <button class="button_return">トップページに戻る</button>
+        </a>
     </div>
 
 {% endblock content %}

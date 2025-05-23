@@ -7,7 +7,6 @@ html{
 body {
     background-color: white;
     margin: 0 auto;
-    margin-bottom: 30px;
     width: 1040px;
     height: auto;
     font-family: sans-serif;
@@ -19,7 +18,7 @@ a{
 }
 
 table{
-    width: 900px;
+    width: 870px;
     border: 1px solid gray;
     border-collapse: collapse;
     background-color: #fff;
@@ -76,21 +75,20 @@ header {
 
 /* 認証関係 */
 .auth-container {
-    display: flex;
-    justify-content: center;
-    height: 100vh;
-}
-
-.auth-box{
-    margin-top:100px;
-    width:600px;
-    height: 700px;
-    border: 2px solid black;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    width: 1000px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    text-align: center;
+}
+
+.auth-box{
+    width: 700px;
+    padding-bottom:50px;
+    border: 2px solid black;
     background-color: #D7EEFF;
     border-radius: 8px;
     box-shadow: 2px 2px 2px black;
@@ -143,22 +141,22 @@ header {
 }
 
 .container {
-    height: 600px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
-    gap: 80px; /* ボックス間のスペース */
-    margin-top: 50px;
+    gap: 50px; /* ボックス間のスペース */
 }
 
 .box {
     width: 350px;
-    height: 480px;
+    height: 400px;
+    padding-bottom:50px ;
     border: 2px solid black;
     display: flex;
     flex-direction: column; /* 子要素を縦に並べる（デフォルトは横（row）） */
     justify-content: center;
     align-items: center;
-    gap: 10px;
     background-color: #D7EEFF;
     border-radius: 8px;
     box-shadow: 2px 2px 2px black;
@@ -168,6 +166,34 @@ header {
     font-size: 28px;
     font-weight: bold;
 }
+
+
+/* アカウント編集 */
+.account-container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.account-box{
+    width: 700px;
+    padding-bottom:50px;
+    border: 2px solid black;
+    background-color: #D7EEFF;
+    border-radius: 8px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.account-box p{
+    font-size: 28px;
+    font-weight: bold;
+}
+
 
 
 /* 問題管理画面 */
@@ -211,6 +237,7 @@ header {
 .question-area{
     border: 4px double #333;
     padding: 10px;
+    height: auto;
     width: 800px;
     background-color: #f5f5f5;
     font-size: 20px;
@@ -262,7 +289,7 @@ header {
     width: 700px;
     margin:10px auto;
     justify-content: center;
-    margin-bottom: 100px;
+    margin-bottom: 10px;
 }
 
 .choice {
@@ -334,12 +361,83 @@ header {
 }
 
 
+/* 解答画面 */
+.standart-box {
+    width: 1000px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top:30px;
+    padding-bottom:60px;
+}
+
+.explanation-area{
+    border: 4px double #333;
+    height: auto;
+    width: 700px;
+    background-color: #f5f5f5;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    margin: 10px auto;
+    padding:20px 20px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.choice_answer {
+    border: 2px solid #666;
+    padding: 15px 25px;
+    background-color:#EAF3FF;
+    border-radius: 10px;
+    min-width: 120px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 2px 2px 2px black;
+}
+
+/* 経験値取得画面 */
+.exp_message{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.container_levelup {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    gap: 80px; /* ボックス間のスペース */
+    margin-top: 50px;
+}
+
+
 /* 各種ボタン */
-button {
+.button_decision {
+    width: 200px;
+    height: 70px;
+    padding: 8px 16px;
+    margin-top:50px;
+    margin-bottom:50px;
+    font-size: 24px;
+    font-weight: bold;
+    color:white;
+    background-color:#3E8FE6;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.button_home {
     width: 200px;
     height: 70px;
     padding: 8px 16px;
     margin-top:20px;
+    margin-bottom:20px;
     font-size: 24px;
     font-weight: bold;
     color:white;
@@ -405,12 +503,13 @@ button {
 
 .button_start{
     width: 300px;
-    height: 100px;
+    height: 70px;
     font-size: 28px;
     line-height: 10px;
-    background-color: #3E8FE6;
+    background-color: blue;
     color:white;
     text-align: center;
+    margin-bottom: 20px;
 }
 
 

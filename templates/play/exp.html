@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}解答{% endblock %}
+
+{% block content %}
+
+    <div class="standart-box">
+
+        <div class="explanation-area">
+            <p>
+                ●獲得した経験値：{{ score }}点<br>
+                ●トータル経験値：{{ total_exp }}点<br>
+            </p>            
+        </div>
+
+        <!-- レベルアップが5の場合 -->
+        {% if current_level == 5 %}
+            <div class="exp_message">
+                あなたは最高レベルです！<br>
+                今後も高みを目指しましょう！！
+            </div>
+        <!-- レベルアップしなかった場合 -->
+        {% elif current_level == new_level %}
+            <div class="exp_message">
+                次のレベルまであと<span style="color:red;">{{ left_exp }}</span>ポイントです！<br>
+                レベルアップ目指して頑張りましょう！！
+            </div>
+        <!-- レベルアップした場合 -->
+        {% else %}
+            <div class="exp_message">
+                <span style="color:red;">レベル{{ new_level }}にレベルアップしました！！</span><br>
+
+                <div class="container_levelup">
+                    <div class="">
+                        {% if current_level == 1 %}
+                            <img src="{% static 'images/level1.png' %}" width="100" height="100">
+                        {% elif current_level == 2 %}
+                            <img src="{% static 'images/level2.png' %}" width="100" height="100">
+                        {% elif current_level == 3 %}
+                            <img src="{% static 'images/level3.png' %}" width="100" height="100">
+                        {% elif current_level == 4 %}
+                            <img src="{% static 'images/level4.png' %}" width="100" height="100">
+                        {% endif %}            
+                    </div>
+                    <div class="">
+                        <img src="{% static 'images/levelup.png' %}" width="100" height="100">
+                    </div>
+                    <div class="">
+                        {% if new_level == 2 %}
+                            <img src="{% static 'images/level2.png' %}" width="100" height="100">
+                        {% elif new_level == 3 %}
+                            <img src="{% static 'images/level3.png' %}" width="100" height="100">
+                        {% elif new_level == 4 %}
+                            <img src="{% static 'images/level4.png' %}" width="100" height="100">
+                        {% elif new_level == 5 %}
+                            <img src="{% static 'images/level5.png' %}" width="100" height="100">
+                        {% endif %}            
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+        <a href="{% url 'home:index' %}">
+            <button class="button_return">トップページに戻る</button>
+        </a>
+
+    </div>
+
+{% endblock content %}

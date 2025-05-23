@@ -243,6 +243,9 @@ def result_view(request):
     elif(rank == "input"):
         rank_id=2
 
+    # 得点をセッションで管理
+    request.session["score"] = score
+
     # 結果画面を表示
     return render(request, "play/result.html", {
         "results": results, # 結果配列
@@ -274,3 +277,51 @@ def result_force(request):
 
     # 結果画面へリダイレクト
     return redirect("play:result")
+
+
+# 解答画面
+def answer_view(request,pk):
+
+    question = get_object_or_404(Question, pk=pk)
+    return render(request, 'play/answer.html', {'question': question})
+
+# 経験値取得画面
+def exp_view(request):
+
+    # セッションから得点を取得
+    score = request.session.get("score")
+
+    # ユーザの現在のレベルと経験値を取得
+    tmp_level = request.user.level
+    current_level = tmp_level
+    current_exp = request.user.exp
+
+    # 経験値に得点を加算
+    total_exp = current_exp + score
+
+    # 次のレベルに必要な経験値を算出
+    next_exp = current_level ** 2 * settings.EXP_COEFFICIENT
+
+    # 次のレベルまでに必要な経験値を初期化
+    left_exp = 0
+
+    if total_exp >= next_exp:
+        new_level = current_level + 1
+    else:
+        new_level = current_level
+        # 次のレベルまでに必要な経験値を算出
+        left_exp = next_exp - total_exp
+
+    # ユーザ名を更新
+    request.user.level = new_level
+    request.user.exp = total_exp
+    request.user.save()
+
+    # 経験値取得画面を表示
+    return render(request, "play/exp.html", {
+        "current_level": current_level, # 現在のレベル
+        "new_level": new_level, # 新しいレベル
+        "score": score, # 得点
+        "total_exp": total_exp, # 得点加算後の経験値
+        "left_exp": left_exp, # 次のレベルに必要な経験値
+    })

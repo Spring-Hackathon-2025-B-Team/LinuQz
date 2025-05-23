@@ -22,7 +22,6 @@ table{
     border: 1px solid gray;
     border-collapse: collapse;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     text-align: center;
     margin:20px auto;
 }
@@ -416,35 +415,108 @@ header {
 }
 
 
+/* ランキング画面 */
+.ranking-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.tab-button-choice {
+    padding: 10px 175px;
+    cursor: pointer;
+    background-color:#5C73DB;
+}
+
+.tab-button-input {
+    padding: 10px 175px;
+    cursor: pointer;
+    background-color:#223DB6;
+}
+
+.tab-button.active {
+    border: 3px solid red;
+    font-weight: bold;
+}
+
+.tab-content {
+    display: none;
+    width: 808px;
+    height: 500px;
+    text-align: center;
+    padding: 10px;
+    border: 2px solid #aaa;
+    background-color: #fff;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.ranking_table{
+    width:750px;
+    border: none !important;
+    margin-top: 30px;
+}
+
+.ranking_th {
+    border: none !important;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: underline;
+    background-color: white;
+}
+
+.ranking_td{
+    border: none !important;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.color_gold {
+    color: #e6b422;
+}
+
+.color_silver {
+    color: #C0C0C0;
+}
+
+.color_bronze {
+    color: #B87333;
+}
+
 /* 各種ボタン */
-.button_decision {
+button{
     width: 200px;
     height: 70px;
     padding: 8px 16px;
-    margin-top:50px;
-    margin-bottom:50px;
-    font-size: 24px;
-    font-weight: bold;
-    color:white;
     background-color:#3E8FE6;
     cursor: pointer;
     border-radius: 8px;
     box-shadow: 2px 2px 2px black;
+    font-size: 24px;
+    font-weight: bold;
+    color:white;
+    text-align: center;
+}
+
+.button_decision {
+    margin-top:50px;
+    margin-bottom:50px;
 }
 
 .button_home {
-    width: 200px;
-    height: 70px;
-    padding: 8px 16px;
     margin-top:20px;
     margin-bottom:20px;
-    font-size: 24px;
-    font-weight: bold;
-    color:white;
-    background-color:#3E8FE6;
-    cursor: pointer;
-    border-radius: 8px;
-    box-shadow: 2px 2px 2px black;
 }
 
 .button_choice{
@@ -469,10 +541,7 @@ header {
     border: 1px solid black;
     box-shadow: 1px 1px 1px black;
     background-color: #005FFF;
-    text-align: center;
     font-size:17px;
-    font-weight: bold;
-    color:white;
 }
 
 .button_edit{
@@ -484,7 +553,6 @@ header {
     box-shadow: 1px 1px 1px black;
     background-color: #8EB8FF;
     font-size:17px;
-    font-weight: bold;
     color:black;
 }
 
@@ -497,36 +565,33 @@ header {
     box-shadow: 1px 1px 1px black;
     background-color: #BBBBBB;
     font-size:17px;
-    font-weight: bold;
     color:black;
 }
 
 .button_start{
     width: 300px;
     height: 70px;
-    font-size: 28px;
     line-height: 10px;
-    background-color: blue;
-    color:white;
-    text-align: center;
-    margin-bottom: 20px;
+    margin-top:50px;
+    margin-bottom:30px;
 }
 
 
 .button_return{
+    margin-top: 30px;
     width: 220px;
     height: 50px;
     font-size: 20px;
-    line-height: 10px;
     background-color: #ccc;
     color:black;
-    text-align: center;
 }
 
 .button_answer{
     width: 250px;
     height: 40px;
     font-size: 16px;
+    color:black;
     line-height: 10px;
     margin: 10px auto;
+    background-color: #ccc;
 }

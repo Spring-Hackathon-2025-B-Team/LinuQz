@@ -15,9 +15,18 @@
         </form>
         <div class="box">
             <p>実績</p>
-            <button class="button_home">ランキング</button>
-            <button class="button_home">履歴</button>
-            <button class="button_home">不正解一覧</button>
+            <a href="{% url 'history:ranking' %}">
+                <button class="button_home">ランキング</button>
+            </a>
+
+            <a href="">
+                <button class="button_home">履歴</button>
+            </a>
+
+            <a href="">
+                <button class="button_home">不正解一覧</button>
+            </a>
+
         </div>
     </div>
 

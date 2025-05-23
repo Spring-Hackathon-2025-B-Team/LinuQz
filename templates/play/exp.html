@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}解答{% endblock %}
+{% block title %}経験値取得{% endblock %}
 
 {% block content %}
 
@@ -28,7 +28,11 @@
         <!-- レベルアップした場合 -->
         {% else %}
             <div class="exp_message">
+                <span style="color:red;">おめでとうございます！</span><br>
                 <span style="color:red;">レベル{{ new_level }}にレベルアップしました！！</span><br>
+                {% if new_level == 3 %}
+                    <span style="color:red;">（記述問題にチャレンジできるようになりました）</span><br>
+                {% endif %}
 
                 <div class="container_levelup">
                     <div class="">

@@ -1,20 +1,76 @@
-<h2>初級</h2>
-<ul>
-  {% for item in ranking_BEGINNER %}
-  <li>{{ item.user.name }} - {{ item.score }}</li>
-  {% endfor %}
-</ul>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}ランキング{% endblock %}
 
-<h2>中級</h2>
-<ul>
-  {% for item in ranking_INTERMEDIATE %}
-  <li>{{ item.user.name }} - {{ item.score }}</li>
-  {% endfor %}
-</ul>
+{% block content %}
 
-<h2>上級</h2>
-<ul>
-  {% for item in ranking_ADVANCED %}
-  <li>{{ item.user.name }} - {{ item.score }}</li>
-  {% endfor %}
-</ul>
+    <div class="ranking-area">
+        <div class="tab-buttons">
+            <div class="tab-button tab-button-choice active" onclick="switchTab(0)">選択問題</div>
+            <div class="tab-button tab-button-input" onclick="switchTab(1)">記述問題</div>
+        </div>
+        
+        <div class="tab-content active">
+            <h1>～ランキング（選択問題）～</h1>
+            <table class="ranking_table">
+                <thead>
+                    <tr>
+                        <th width="30px" class="ranking_th"></th>
+                        <th width="30px" class="ranking_th">順位</th>
+                        <th width="100px" class="ranking_th">ユーザ名</th>
+                        <th width="30px" class="ranking_th">得点</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in ranking_CHOICE %}
+                        <tr height="72">
+
+                            {% if item.ranking == 1 %}
+                                <td class="ranking_td"><img src="{% static 'images/gold.png' %}" width="40" height="30"></td>
+                            {% elif item.ranking == 2 %}
+                                <td class="ranking_td"><img src="{% static 'images/silver.png' %}" width="40" height="30"></td>
+                            {% elif item.ranking == 3 %}
+                                <td class="ranking_td"><img src="{% static 'images/bronze.png' %}" width="40" height="30"></td>
+                            {% else %}
+                                <td class="ranking_td"></td>
+                            {% endif %}
+                          
+                            {% if item.ranking == 1 %}
+                                <td class="ranking_td color_gold">{{ item.ranking }}位</td>
+                            {% elif item.ranking == 2 %}
+                                <td class="ranking_td color_silver">{{ item.ranking }}位</td>
+                            {% elif item.ranking == 3 %}
+                                <td class="ranking_td color_bronze">{{ item.ranking }}位</td>
+                            {% else %}
+                                <td class="ranking_td">{{ item.ranking }}位</td>
+                            {% endif %}
+
+                            <td class="ranking_td">　{{ item.history.user_id.name }}</td>
+
+                            <td class="ranking_td">{{ item.history.score }}</td>
+
+                          </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-content">
+            <h2>ランキング（記述問題）</h2>
+            <p>これは中級編の中身です。</p>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(index) {
+            const tabs = document.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.tab-content');
+    
+            tabs.forEach((tab, i) => {
+                tab.classList.toggle('active', i === index);
+                contents[i].classList.toggle('active', i === index);
+            });
+        }
+
+    </script>
+
+{% endblock content %}

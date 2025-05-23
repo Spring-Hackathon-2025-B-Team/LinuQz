@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from datetime import timedelta
-from apps.question.models import Question
 from random import sample
 from uuid import UUID
 from django.conf import settings
+from apps.question.models import Question
+from apps.user.models import User
+from .models import History
 
 
 # 問題開始画面
@@ -288,6 +290,15 @@ def answer_view(request,pk):
 # 経験値取得画面
 def exp_view(request):
 
+    # セッションからランクを取得
+    rank = request.session.get("rank")
+
+    # rank_idの取得
+    if(rank == "choice"):
+        rank_id=1
+    elif(rank == "input"):
+        rank_id=2
+
     # セッションから得点を取得
     score = request.session.get("score")
 
@@ -312,10 +323,20 @@ def exp_view(request):
         # 次のレベルまでに必要な経験値を算出
         left_exp = next_exp - total_exp
 
-    # ユーザ名を更新
+    # ユーザ情報を更新（レベル・経験値）
     request.user.level = new_level
     request.user.exp = total_exp
     request.user.save()
+
+    # ユーザid(uuid)を取得
+    user_id = User.objects.get(id=request.user.id)
+
+    # 実施履歴テーブルの更新
+    History.objects.create(
+        user_id=user_id,
+        rank_id=rank_id,
+        score=score,
+    )
 
     # 経験値取得画面を表示
     return render(request, "play/exp.html", {

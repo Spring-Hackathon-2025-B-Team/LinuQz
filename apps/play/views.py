@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from datetime import timedelta
-from apps.question.models import Question
 from random import sample
 from uuid import UUID
 from django.conf import settings
+from apps.question.models import Question
+from apps.user.models import User
+from .models import History
 
 
 # 問題開始画面
@@ -118,7 +120,10 @@ def question_view(request):
     if request.method == "POST":
 
         # 選択した内容（回答）を取得
-        selected = request.POST.get("choice")
+        if rank == "choice":
+            selected = request.POST.get("choice")
+        elif rank == "input":
+            selected = request.POST.get("input")
 
         # 選択した内容（回答）をユーザ回答配列に格納
         request.session["user_answers"].append(selected)
@@ -136,8 +141,9 @@ def question_view(request):
     # ランクが「choice（選択問題）」の場合
     if(rank == "choice"):
 
-        # 問題実施画面を表示
+        # 問題実施画面（選択問題用）を表示
         return render(request, "play/question.html", {
+            "rank": rank,  # ランク
             "number": current + 1,  # 問題番号
             "question_obj": question_obj,  # 問題
             "choices": enumerate(question_obj.get_choices()),  # 選択肢の配列
@@ -146,8 +152,16 @@ def question_view(request):
         })
 
     # ランクが「input（記述問題）」の場合
-    # if(rank == "input"):
-        # 問題実施画面（記述用）を表示
+    if(rank == "input"):
+
+        # 問題実施画面（記述問題用）を表示
+        return render(request, "play/question.html", {
+            "rank": rank,  # ランク
+            "number": current + 1,  # 問題番号
+            "question_obj": question_obj,  # 問題
+            "TIME_LIMIT": settings.TIME_LIMIT,  # 制限時間
+            "start_time_js": request.session.get("start_time"),  # 開始時刻
+        })
 
 
 # 結果画面
@@ -243,6 +257,9 @@ def result_view(request):
     elif(rank == "input"):
         rank_id=2
 
+    # 得点をセッションで管理
+    request.session["score"] = score
+
     # 結果画面を表示
     return render(request, "play/result.html", {
         "results": results, # 結果配列
@@ -274,3 +291,70 @@ def result_force(request):
 
     # 結果画面へリダイレクト
     return redirect("play:result")
+
+
+# 解説画面
+def answer_view(request,pk):
+
+    question = get_object_or_404(Question, pk=pk)
+    return render(request, 'play/answer.html', {'question': question})
+
+# 経験値取得画面
+def exp_view(request):
+
+    # セッションからランクを取得
+    rank = request.session.get("rank")
+
+    # rank_idの取得
+    if(rank == "choice"):
+        rank_id=1
+    elif(rank == "input"):
+        rank_id=2
+
+    # セッションから得点を取得
+    score = request.session.get("score")
+
+    # ユーザの現在のレベルと経験値を取得
+    tmp_level = request.user.level
+    current_level = tmp_level
+    current_exp = request.user.exp
+
+    # 経験値に得点を加算
+    total_exp = current_exp + score
+
+    # 次のレベルに必要な経験値を算出
+    next_exp = current_level ** 2 * settings.EXP_COEFFICIENT
+
+    # 次のレベルまでに必要な経験値を初期化
+    left_exp = 0
+
+    if total_exp >= next_exp:
+        new_level = current_level + 1
+    else:
+        new_level = current_level
+        # 次のレベルまでに必要な経験値を算出
+        left_exp = next_exp - total_exp
+
+    # ユーザ情報を更新（レベル・経験値）
+    request.user.level = new_level
+    request.user.exp = total_exp
+    request.user.save()
+
+    # ユーザid(uuid)を取得
+    user_id = User.objects.get(id=request.user.id)
+
+    # 実施履歴テーブルの更新
+    History.objects.create(
+        user_id=user_id,
+        rank_id=rank_id,
+        score=score,
+    )
+
+    # 経験値取得画面を表示
+    return render(request, "play/exp.html", {
+        "current_level": current_level, # 現在のレベル
+        "new_level": new_level, # 新しいレベル
+        "score": score, # 得点
+        "total_exp": total_exp, # 得点加算後の経験値
+        "left_exp": left_exp, # 次のレベルに必要な経験値
+    })

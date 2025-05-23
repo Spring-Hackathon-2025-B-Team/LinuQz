@@ -3,48 +3,71 @@
 
 {% block content %}
 
-    <!-- 進捗バーと残り時間の表示 -->
-    <div class="timer-area">
+    <div class="standart-box">
 
-        <!-- 進捗バーの表示 -->
-        <div id="timer-bar">
-            <div id="timer-fill"></div>
+        <!-- 進捗バーと残り時間の表示 -->
+        <div class="timer-area">
+
+            <!-- 進捗バーの表示 -->
+            <div id="timer-bar">
+                <div id="timer-fill"></div>
+            </div>
+
+            <!-- 残り時間の表示 -->
+            <div class="remaining_time">
+                <p>残り時間：<span id="countdown"></span> 秒</p>    
+            </div>
         </div>
 
-        <!-- 残り時間の表示 -->
-        <div class="remaining_time">
-            <p>残り時間：<span id="countdown"></span> 秒</p>    
+        <!-- 問題と選択肢の表示 -->
+        <div class="explanation-area question-text">
+            【問題 {{ number }}】
+            <br>
+            {{ question_obj.question|linebreaksbr  }}
         </div>
-    </div>
 
-    <!-- 問題と選択肢の表示 -->
-    <div class="question-area">
-        【問題 {{ number }}】
-        <br>
-        {{ question_obj.question|linebreaksbr  }}
-    </div>
+        <form id="question-form" method="post">
+            {% csrf_token %}
 
-    <form id="question-form" method="post">
-        {% csrf_token %}
+            <input type="hidden" name="choice" id="choice-input">
 
-        <input type="hidden" name="choice" id="choice-input">
-        <div class="choices">
-            {% for i, choice in choices %}
-                <div class="choice" onclick="submitChoice('{{ choice }}')">
-                    {% if i == 0 %}
-                        ①　 {{ choice }}
-                    {% elif i == 1 %}
-                        ②　 {{ choice }}
-                    {% elif i == 2 %}
-                        ③　 {{ choice }}
-                    {% elif i == 3 %}
-                        ④　 {{ choice }}
-                    {% endif %}
+            <!-- 選択問題の場合、4択を表示 -->
+            {% if rank == "choice" %}
+
+                <div class="choices">
+                    {% for i, choice in choices %}
+                        <div class="choice" onclick="submitChoice('{{ choice }}')">
+                            {% if i == 0 %}
+                                {{ choice }}
+                            {% elif i == 1 %}
+                                {{ choice }}
+                            {% elif i == 2 %}
+                                {{ choice }}
+                            {% elif i == 3 %}
+                                {{ choice }}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
-        </div>
-    
-    </form>
+
+            <!-- 記述問題の場合、コマンド入力欄を表示 -->
+            {% elif rank == "input" %}
+                <div class="command_input">
+                    <label for="input">コマンド入力：</label>
+                    <input type="text" name="input" id="input" class="command_input_area" autofocus>
+                </div>
+                <div class="button-center">
+                    <button type="submit">回答</button>
+                </div>
+            {% endif %}
+            
+        </form>
+
+        <a href="{% url 'home:index' %}">
+            <button class="button_return">トップページに戻る</button>
+        </a>
+
+    </div>
 
     <script>
 

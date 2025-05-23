@@ -7,17 +7,26 @@
         <form method="get" action="{% url 'play:start' %}">
             <div class="box">
                 <p>問題にチャレンジ！</p>
-                <div class="button_area">
-                    <button class="button_choice" name="rank" value="choice">選択問題</button>
-                </div>
-                <button class="button_input" name="rank" value="input">記述問題</button>
+                <button class="button_home button_choice" name="rank" value="choice">選択問題</button>
+                {% if user.level >= 3 %}
+                    <button class="button_home button_input" name="rank" value="input">記述問題</button>
+                {% endif %}
             </div>
         </form>
         <div class="box">
-            <p>実績</p>
-            <button>ランキング</button>
-            <button>履歴</button>
-            <button>不正解一覧</button>
+            <p>実績を確認！</p>
+            <a href="{% url 'history:ranking' %}">
+                <button class="button_home">ランキング</button>
+            </a>
+
+            <a href="">
+                <button class="button_home">履歴</button>
+            </a>
+
+            <a href="">
+                <button class="button_home">不正解一覧</button>
+            </a>
+
         </div>
     </div>
 

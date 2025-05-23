@@ -155,3 +155,6 @@ RANK_2_INCORRECT_POINT = -10
 # 問題実施に関する定数
 TIME_LIMIT = 60  # 制限時間（秒）
 NUMBER_OF_QUESTIONS = 10  # 問題数
+
+# 経験値に関する定数
+EXP_COEFFICIENT = 50  # レベルアップ計算に使う係数

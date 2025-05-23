@@ -27,11 +27,11 @@
                     </div>
                 {% endfor %}
 
-                <button type="submit" class="button_update">登録</button>
+                <button type="submit" class="button_decision">登録</button>
             </form>
 
-            <a href="{% url 'question:index' %}" class="moving_link">
-                    問題一覧に戻る
+            <a href="{% url 'question:index' %}">
+                <button class="button_return">問題一覧に戻る</button>
             </a>
         </div>
     </div>

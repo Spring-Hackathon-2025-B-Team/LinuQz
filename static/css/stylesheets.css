@@ -7,7 +7,6 @@ html{
 body {
     background-color: white;
     margin: 0 auto;
-    margin-bottom: 30px;
     width: 1040px;
     height: auto;
     font-family: sans-serif;
@@ -19,11 +18,10 @@ a{
 }
 
 table{
-    width: 900px;
+    width: 870px;
     border: 1px solid gray;
     border-collapse: collapse;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     text-align: center;
     margin:20px auto;
 }
@@ -76,21 +74,20 @@ header {
 
 /* 認証関係 */
 .auth-container {
-    display: flex;
-    justify-content: center;
-    height: 100vh;
-}
-
-.auth-box{
-    margin-top:100px;
-    width:600px;
-    height: 700px;
-    border: 2px solid black;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    width: 1000px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    text-align: center;
+}
+
+.auth-box{
+    width: 700px;
+    padding-bottom:50px;
+    border: 2px solid black;
     background-color: #D7EEFF;
     border-radius: 8px;
     box-shadow: 2px 2px 2px black;
@@ -143,22 +140,22 @@ header {
 }
 
 .container {
-    height: 600px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
-    gap: 80px; /* ボックス間のスペース */
-    margin-top: 50px;
+    gap: 50px; /* ボックス間のスペース */
 }
 
 .box {
     width: 350px;
-    height: 480px;
+    height: 400px;
+    padding-bottom:50px ;
     border: 2px solid black;
     display: flex;
     flex-direction: column; /* 子要素を縦に並べる（デフォルトは横（row）） */
     justify-content: center;
     align-items: center;
-    gap: 10px;
     background-color: #D7EEFF;
     border-radius: 8px;
     box-shadow: 2px 2px 2px black;
@@ -168,6 +165,34 @@ header {
     font-size: 28px;
     font-weight: bold;
 }
+
+
+/* アカウント編集 */
+.account-container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.account-box{
+    width: 700px;
+    padding-bottom:50px;
+    border: 2px solid black;
+    background-color: #D7EEFF;
+    border-radius: 8px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.account-box p{
+    font-size: 28px;
+    font-weight: bold;
+}
+
 
 
 /* 問題管理画面 */
@@ -197,6 +222,24 @@ header {
     margin:0 auto;
 }
 
+.rank_choice_design{
+    border:1px solid black;
+    border-radius: 5px;
+    background-color: #5C73DB;
+    padding: 5px 5px;
+    color:white;
+    font-weight: bold;
+}
+
+.rank_input_design{
+    border:1px solid black;
+    border-radius: 5px;
+    background-color: #223DB6;
+    padding: 5px 5px;
+    color:white;
+    font-weight: bold;
+}
+
 
 /* 問題実施画面 */
 .question-box {
@@ -211,6 +254,7 @@ header {
 .question-area{
     border: 4px double #333;
     padding: 10px;
+    height: auto;
     width: 800px;
     background-color: #f5f5f5;
     font-size: 20px;
@@ -219,6 +263,23 @@ header {
     margin: 20px auto;
     margin-top: 20px;
     box-shadow: 2px 2px 2px black;
+}
+
+.explanation-area{
+    border: 4px double #333;
+    height: auto;
+    width: 700px;
+    background-color: #f5f5f5;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    margin: 10px auto;
+    padding:20px 20px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.question-text{
+    background-color: #EEFFFF;
 }
 
 .timer-area{
@@ -262,7 +323,7 @@ header {
     width: 700px;
     margin:10px auto;
     justify-content: center;
-    margin-bottom: 100px;
+    margin-bottom: 10px;
 }
 
 .choice {
@@ -281,6 +342,20 @@ header {
 
 .choice:hover {
     background-color: #5C73DB;
+}
+
+.command_input{
+    width: 600px;
+    text-align: center;
+    margin: 30px auto;
+    font-size:24px;
+    font-weight: bold;
+}
+
+.command_input_area{
+    width: 400px;
+    height: 30px;
+    font-size:26px;
 }
 
 .point_total{
@@ -334,19 +409,167 @@ header {
 }
 
 
-/* 各種ボタン */
-button {
-    width: 200px;
-    height: 70px;
-    padding: 8px 16px;
-    margin-top:20px;
+/* 解答画面 */
+.standart-box {
+    width: 1000px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top:30px;
+    padding-bottom:60px;
+}
+
+.choice_answer {
+    border: 2px solid #666;
+    padding: 15px 25px;
+    background-color:#EAF3FF;
+    border-radius: 10px;
+    min-width: 120px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 2px 2px 2px black;
+}
+
+/* 経験値取得画面 */
+.exp_message{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.container_levelup {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    gap: 80px; /* ボックス間のスペース */
+    margin-top: 50px;
+}
+
+
+/* ランキング画面 */
+.ranking-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.tab-button-choice {
+    padding: 10px 175px;
+    cursor: pointer;
+    background-color:#5C73DB;
+}
+
+.tab-button-input {
+    padding: 10px 175px;
+    cursor: pointer;
+    background-color:#223DB6;
+}
+
+.tab-button.active {
+    border: 3px solid red;
+    font-weight: bold;
+}
+
+.tab-content {
+    display: none;
+    width: 808px;
+    height: 500px;
+    text-align: center;
+    padding: 10px;
+    border: 2px solid #aaa;
+    background-color: #fff;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.ranking_title{
+    width: 700px;
+    height: 60px;
+    margin: 10px auto;
+    line-height: 1px;
+    font-size: 30px;
+    font-weight: bold;
+    border: 1px solid #AAFFFF;
+    border-radius: 10px;
+    background-color: #DDFFFF;
+}
+
+.ranking_table{
+    width:750px;
+    border: none !important;
+    margin-top: 30px;
+}
+
+.ranking_th {
+    border: none !important;
     font-size: 24px;
     font-weight: bold;
-    color:white;
+    text-decoration: underline;
+    background-color: white;
+}
+
+.ranking_td{
+    border: none !important;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.color_gold {
+    color: #e6b422;
+}
+
+.color_silver {
+    color: #C0C0C0;
+}
+
+.color_bronze {
+    color: #B87333;
+}
+
+/* 各種ボタン */
+button{
+    width: 200px;
+    height: 70px;
+    margin: 0px auto;
+    padding: 8px 16px;
     background-color:#3E8FE6;
     cursor: pointer;
     border-radius: 8px;
     box-shadow: 2px 2px 2px black;
+    font-size: 24px;
+    font-weight: bold;
+    color:white;
+    text-align: center;
+}
+
+.button-center{
+    text-align: center;
+}
+
+.button_decision {
+    margin-top:50px;
+    margin-bottom:50px;
+}
+
+.button_home {
+    margin-top:20px;
+    margin-bottom:20px;
 }
 
 .button_choice{
@@ -357,24 +580,19 @@ button {
     background-color:#223DB6;
 }
 
-.button_update{
-    margin-bottom: 20px;
-}
-
 .button_create{
     display: block;
     width: 185px;
     height: 28px;
     float: right;
     margin-bottom:10px;
-    margin-right:72px;
+    margin-right:87px;
     border: 1px solid black;
     box-shadow: 1px 1px 1px black;
     background-color: #005FFF;
-    text-align: center;
     font-size:17px;
-    font-weight: bold;
     color:white;
+    text-align: center;
 }
 
 .button_edit{
@@ -386,7 +604,6 @@ button {
     box-shadow: 1px 1px 1px black;
     background-color: #8EB8FF;
     font-size:17px;
-    font-weight: bold;
     color:black;
 }
 
@@ -399,35 +616,33 @@ button {
     box-shadow: 1px 1px 1px black;
     background-color: #BBBBBB;
     font-size:17px;
-    font-weight: bold;
     color:black;
 }
 
 .button_start{
     width: 300px;
-    height: 100px;
-    font-size: 28px;
+    height: 70px;
     line-height: 10px;
-    background-color: #3E8FE6;
-    color:white;
-    text-align: center;
+    margin-top:50px;
+    margin-bottom:30px;
 }
 
-
 .button_return{
+    margin-top: 50px;
+    margin-bottom: 20px;
     width: 220px;
     height: 50px;
     font-size: 20px;
-    line-height: 10px;
     background-color: #ccc;
     color:black;
-    text-align: center;
 }
 
 .button_answer{
     width: 250px;
     height: 40px;
     font-size: 16px;
+    color:black;
     line-height: 10px;
     margin: 10px auto;
+    background-color: #ccc;
 }

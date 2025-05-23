@@ -9,4 +9,6 @@ urlpatterns = [
     path('question/', views.question_view, name='question'),
     path('result/', views.result_view, name='result'),
     path("result/force", views.result_force, name="result_force"),
+    path('answer/<uuid:pk>/', views.answer_view, name='answer'),
+    path('exp/', views.exp_view, name='exp'),
 ]

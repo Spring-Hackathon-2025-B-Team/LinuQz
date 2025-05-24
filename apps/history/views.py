@@ -30,3 +30,8 @@ class IncorrectList(ListView):
     model = Incorrects
     context_object_name = 'incorrect_list'
 
+    def get_queryset(self):
+        """ログイン中のユーザーの不正解一覧を取得"""
+        queryset = Incorrects.objects.filter(user=self.request.user)
+        return queryset
+

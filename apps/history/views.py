@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
-from .models import Histories
+from .models import Histories, Incorrects
 
 
 class RankingList(ListView):
@@ -23,3 +23,9 @@ class RankingList(ListView):
         context['ranking_INTERMEDIATE'] = Histories.objects.select_related('user').filter(rank_id=2).order_by('-score')[:3]
         context['ranking_ADVANCED'] = Histories.objects.select_related('user').filter(rank_id=3).order_by('-score')[:3]
         return context
+    
+class IncorrectList(ListView):
+    template_name = 'history/incorrect.html'
+    model = Incorrects
+    context_object_name = 'incorrect_list'
+

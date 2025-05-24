@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.user.apps.UserConfig',
     'apps.home.apps.HomeConfig',
+    'apps.play.apps.PlayConfig',
     'apps.question.apps.QuestionConfig',
     'apps.history.apps.HistoryConfig',
 ]
@@ -150,3 +151,10 @@ RANK_1_INCORRECT_POINT = -5
 RANK_2_NAME = '記述'
 RANK_2_CORRECT_POINT = 20
 RANK_2_INCORRECT_POINT = -10
+
+# 問題実施に関する定数
+TIME_LIMIT = 60  # 制限時間（秒）
+NUMBER_OF_QUESTIONS = 10  # 問題数
+
+# 経験値に関する定数
+EXP_COEFFICIENT = 50  # レベルアップ計算に使う係数

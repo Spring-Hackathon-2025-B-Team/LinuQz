@@ -26,9 +26,9 @@
                     <tr>
                         <td>
                             {% if question.rank_id == 1 %}
-                                {{ RANK_1_NAME }}
+                                <span class="rank_choice_design">{{ RANK_1_NAME }}</span>
                             {% elif question.rank_id == 2 %}
-                                {{ RANK_2_NAME }}
+                                <span class="rank_input_design">{{ RANK_2_NAME }}</span>
                             {% endif %}
                         </td>
                         <td class="td_item_left">{{ question.question }}</td>

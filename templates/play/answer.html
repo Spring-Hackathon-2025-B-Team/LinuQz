@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}解答{% endblock %}
+
+{% block content %}
+
+    <div class="standart-box">
+
+        <div class="explanation-area question-text">
+            【問題】
+            <br>
+            {{ question.question|linebreaksbr }}
+        </div>
+
+        {% if question.rank_id == 1 %}
+            <div class="choices">
+                <div class="choice_answer">
+                    {{ question.choice_1 }}
+                </div>
+                <div class="choice_answer">
+                    {{ question.choice_2 }}
+                </div>
+                <div class="choice_answer">
+                    {{ question.choice_3 }}
+                </div>
+                <div class="choice_answer">
+                    {{ question.choice_4 }}
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="explanation-area">
+            【解答】　{{ question.answer }}
+        </div>
+
+        <div class="explanation-area">
+            【解説】
+            <br>
+            {{ question.explanation|linebreaksbr }}
+        </div>
+
+        <a href="{% url 'play:result' %}">
+            <button class="button_return">結果画面に戻る</button>
+        </a>
+
+    </div>
+
+{% endblock content %}

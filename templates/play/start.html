@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}問題開始{% endblock %}
+
+{% block content %}
+
+    <div class="standart-box">
+
+        <div class="explanation-area">
+            {% if rank == "choice" %}
+                <p>～ルール説明～<br>
+                    ●問題文に従い、正しいLinuxコマンドを4択から選択してください。<br>
+                    ●問題は全部で{{ NUMBER_OF_QUESTIONS }}問出題されます。<br>
+                    ●制限時間は{{ TIME_LIMIT }}秒です。残り時間はボーナスポイントになります。<br>
+                    ●誤答はマイナスポイントとなるので、落ち着いて正解を選びましょう。
+                </p>
+            {% elif rank == "input" %}
+                <p>～ルール説明～<br>
+                    ●問題文に従い、正しいLinuxコマンドを入力してください。<br>
+                    ●問題は全部で{{ NUMBER_OF_QUESTIONS }}問出題されます。<br>
+                    ●制限時間は{{ TIME_LIMIT }}秒です。残り時間はボーナスポイントになります。<br>
+                    ●誤答はマイナスポイントとなるので、落ち着いて入力しましょう。<br>
+                    ●当アプリの仕様上、正解コマンドと完全一致しないと不正解となります。<br>
+                    　あらかじめご了承ください。<br>
+                    　※実際は「書き方が微妙に違うけど挙動は同じ」といった<br>
+                    　　コマンドもあるので、当アプリでの正解コマンドが100%正しい、<br>
+                    　　というわけではございません。お含みおきください。<br>
+                </p>
+            {% endif %}
+        </div>
+
+        <form method="get" action="{% url 'play:question_init' %}">
+            <button class="button_start">{{ rank_display }}問題を開始する</button>
+            <input type="hidden" name="rank" value="{{ rank }}">
+        </form>
+
+        <a href="{% url 'home:index' %}">
+            <button class="button_return">トップページに戻る</button>
+        </a>
+    </div>
+
+{% endblock content %}

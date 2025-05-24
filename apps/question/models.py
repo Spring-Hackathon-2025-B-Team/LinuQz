@@ -24,10 +24,10 @@ class Question(models.Model):
     question = models.TextField(max_length=255,null=False,blank=False)
 
     # 選択肢1～4
-    choice_1 = models.CharField(max_length=50)
-    choice_2 = models.CharField(max_length=50)
-    choice_3 = models.CharField(max_length=50)
-    choice_4 = models.CharField(max_length=50)
+    choice_1 = models.CharField(max_length=50,blank=True, null=True)
+    choice_2 = models.CharField(max_length=50,blank=True, null=True)
+    choice_3 = models.CharField(max_length=50,blank=True, null=True)
+    choice_4 = models.CharField(max_length=50,blank=True, null=True)
 
     # 解答
     answer = models.CharField(max_length=50,null=False,blank=False)
@@ -44,3 +44,6 @@ class Question(models.Model):
     class Meta:
         #明示的にテーブル名を指定
         db_table = 'questions'
+
+    def get_choices(self):
+        return [self.choice_1, self.choice_2, self.choice_3, self.choice_4]

@@ -1,29 +1,69 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
-from .models import Histories, Incorrects
+from .models import Incorrects
+from apps.play.models import History
 
-
+# ランキング表示画面
 class RankingList(ListView):
-    """難易度別に上位のユーザーを取得するためのビュー"""
+
+    """ランク別に上位のユーザーを取得するためのビュー"""
     template_name = 'history/ranking.html'
-    model = Histories
+    model = History
     
     def get_context_data(self, **kwargs):
         """
-        履歴モデルに記録されたスコアに基づき、各難易度（初級、中級、上級）の上位3名のユーザーを表示。
+        実施履歴テーブルに記録されたスコアに基づき、各ランク（選択・記述）の上位5名のユーザーを表示。
         データは `rank_id` でグループ化する。
-        - rank_id = 1 は初級を表す。
-        - rank_id = 2 は中級を表す。
-        - rank_id = 3 は上級を表す。
+        - rank_id = 1 は選択問題
+        - rank_id = 2 は記述問題
         このビューでは、関連するユーザーデータを効率的に取得するために `select_related('user')` を使用。
-        contextには、`ranking_BEGINNER`、`ranking_INTERMEDIATE`、`ranking_ADVANCED` の3つのクエリセットが含まれる。
+        contextには、`ranking_CHOICE`、`ranking_INPUT` の2つのクエリセットが含まれる。
         """
+
         context = super().get_context_data(**kwargs)
-        context['ranking_BEGINNER'] = Histories.objects.select_related('user').filter(rank_id=1).order_by('-score')[:3]
-        context['ranking_INTERMEDIATE'] = Histories.objects.select_related('user').filter(rank_id=2).order_by('-score')[:3]
-        context['ranking_ADVANCED'] = Histories.objects.select_related('user').filter(rank_id=3).order_by('-score')[:3]
-        return context
+        # 選択問題のランキングデータ抽出
+        choice_histories = History.objects.select_related('user_id').filter(rank_id=1).order_by('-score')[:5]
     
+        choice_ranking = []
+        prev_score = None
+        ranking = 0
+        count = 0 
+
+        for h in choice_histories:
+            count += 1
+            if h.score != prev_score:
+                ranking = count
+                prev_score = h.score
+            choice_ranking.append({
+                'ranking': ranking,
+                'history': h,
+            })
+
+        context['ranking_CHOICE'] = choice_ranking
+
+        # 記述問題のランキングデータ抽出
+        input_histories = History.objects.select_related('user_id').filter(rank_id=2).order_by('-score')[:5]
+
+        input_ranking = []
+        prev_score = None
+        ranking = 0
+        count = 0 
+
+        for h in input_histories:
+            count += 1
+            if h.score != prev_score:
+                ranking = count
+                prev_score = h.score
+            input_ranking.append({
+                'ranking': ranking,
+                'history': h,
+            })
+
+        context['ranking_INPUT'] = input_ranking
+
+        return context
+
+# 不正解一覧表示画面
 class IncorrectList(ListView):
     """不正解一覧を取得するためのビュー"""
     template_name = 'history/incorrect.html'
@@ -34,4 +74,3 @@ class IncorrectList(ListView):
         """ログイン中のユーザーの不正解一覧を取得"""
         queryset = Incorrects.objects.filter(user=self.request.user)
         return queryset
-

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
+from .models import Incorrects
 from apps.play.models import History
 
 # ランキング表示画面
@@ -20,7 +21,6 @@ class RankingList(ListView):
         """
 
         context = super().get_context_data(**kwargs)
-
         # 選択問題のランキングデータ抽出
         choice_histories = History.objects.select_related('user_id').filter(rank_id=1).order_by('-score')[:5]
     
@@ -62,3 +62,15 @@ class RankingList(ListView):
         context['ranking_INPUT'] = input_ranking
 
         return context
+
+# 不正解一覧表示画面
+class IncorrectList(ListView):
+    """不正解一覧を取得するためのビュー"""
+    template_name = 'history/incorrect.html'
+    model = Incorrects
+    context_object_name = 'incorrect_list'
+
+    def get_queryset(self):
+        """ログイン中のユーザーの不正解一覧を取得"""
+        queryset = Incorrects.objects.filter(user=self.request.user)
+        return queryset

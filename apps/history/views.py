@@ -25,6 +25,7 @@ class RankingList(ListView):
         return context
     
 class IncorrectList(ListView):
+    """不正解一覧を取得するためのビュー"""
     template_name = 'history/incorrect.html'
     model = Incorrects
     context_object_name = 'incorrect_list'

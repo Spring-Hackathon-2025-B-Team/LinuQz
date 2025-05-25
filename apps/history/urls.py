@@ -6,5 +6,5 @@ app_name = "history"
 urlpatterns = [
     path('ranking/', RankingList.as_view(), name="ranking"),
     path('incorrect/', IncorrectList.as_view(), name="incorrect"),
-    path('retry/<uuid:qustion_id>', RetryQuestion().as_view, name="retry"),
+    path('retry/<uuid:pk>/', RetryQuestion.as_view(), name="retry"),
 ]

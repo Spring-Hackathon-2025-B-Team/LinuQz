@@ -1,7 +1,9 @@
+from django.conf import settings
 from django.shortcuts import render
-from django.views.generic.list import ListView
+from django.views.generic import ListView, DetailView
 from .models import Incorrects
 from apps.play.models import History
+from apps.question.models import Question
 
 # ランキング表示画面
 class RankingList(ListView):
@@ -74,3 +76,17 @@ class IncorrectList(ListView):
         """ログイン中のユーザーの不正解一覧を取得"""
         queryset = Incorrects.objects.filter(user=self.request.user)
         return queryset
+    
+    def get_context_data(self, **kwargs):
+        """問題のランクをsetting.pyから取得"""
+        context = super().get_context_data(**kwargs)
+        context['rank_1'] = settings.RANK_1_NAME
+        context['rank_2'] = settings.RANK_2_NAME
+        return context
+
+# 再チャレンジ画面
+class RetryQuestion(DetailView):
+    """再チャレンジ問題を取得するビュー"""
+    template_name = 'history/retry.html'
+    model = Question
+    context_object_name = 'question' 

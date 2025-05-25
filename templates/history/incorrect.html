@@ -1,1 +1,15 @@
-{% for incorrect in incorrect_list %}{{ incorrect.question.rank_id }}-{{ incorrect.question.question }}{% endfor %}
+{% if incorrect_list %}
+  {% for incorrect in incorrect_list %}
+    {% if incorrect.question.rank_id == 1 %}
+        <span class="rank_choice_design">{{ rank_1 }}</span>
+    {% elif incorrect.question.rank_id == 2 %}
+        <span class="rank_input_design">{{ rank_2 }}</span>
+    {% endif %}
+    {{ incorrect.question.question }}        
+    <form method="get" action="{% url 'history:retry' incorrect.question.id %}">
+        <button>{{ rank_display }}再チャレンジ</button>
+    </form>
+  {% endfor %}
+{% else %}
+  <h1>登録がありません</h1>
+{% endif %}

@@ -5,7 +5,11 @@ from django.contrib import messages
 # トップ画面
 @login_required
 def index_view(request):
-    return render(request, 'home/index.html')
+
+    if request.user.is_staff == True:
+        return render(request, 'home/admin.html')
+    else:
+        return render(request, 'home/index.html')
 
 # アカウント編集画面
 @login_required

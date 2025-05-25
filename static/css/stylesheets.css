@@ -1,12 +1,13 @@
 /* 共通 */
 html{
-    background-image:url(../images/background.jpg);
+    background-image:url(../images/background4.jpg);
     background-size: cover;
 }
 
 body {
     background-color: white;
     margin: 0 auto;
+    margin-bottom: 30px;
     width: 1040px;
     height: auto;
     font-family: sans-serif;
@@ -140,8 +141,9 @@ header {
 }
 
 .container {
-    margin-top: 50px;
+    margin-top: 100px;
     margin-bottom: 50px;
+    height: 500px;
     display: flex;
     justify-content: center;
     gap: 50px; /* ボックス間のスペース */
@@ -225,8 +227,8 @@ header {
 .rank_choice_design{
     border:1px solid black;
     border-radius: 5px;
-    background-color: #5C73DB;
-    padding: 5px 5px;
+    background-color: #005FFF;
+    padding: 5px 10px;
     color:white;
     font-weight: bold;
 }
@@ -235,7 +237,7 @@ header {
     border:1px solid black;
     border-radius: 5px;
     background-color: #223DB6;
-    padding: 5px 5px;
+    padding: 5px 10px;
     color:white;
     font-weight: bold;
 }
@@ -274,12 +276,13 @@ header {
     font-weight: bold;
     text-align: left;
     margin: 10px auto;
-    padding:20px 20px;
+    padding:10px 20px;
     box-shadow: 2px 2px 2px black;
 }
 
 .question-text{
-    background-color: #EEFFFF;
+    height:120px;
+    background-color: #D9E5FF;
 }
 
 .timer-area{
@@ -341,7 +344,7 @@ header {
 }
 
 .choice:hover {
-    background-color: #5C73DB;
+    background-color: #005FFF;
 }
 
 .command_input{
@@ -470,7 +473,7 @@ header {
 .tab-button-choice {
     padding: 10px 175px;
     cursor: pointer;
-    background-color:#5C73DB;
+    background-color:#005FFF;
 }
 
 .tab-button-input {
@@ -487,7 +490,7 @@ header {
 .tab-content {
     display: none;
     width: 808px;
-    height: 500px;
+    height: 540px;
     text-align: center;
     padding: 10px;
     border: 2px solid #aaa;
@@ -501,19 +504,20 @@ header {
 .ranking_title{
     width: 700px;
     height: 60px;
-    margin: 10px auto;
+    margin: 0px auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
     line-height: 1px;
     font-size: 30px;
     font-weight: bold;
     border: 1px solid #AAFFFF;
     border-radius: 10px;
-    background-color: #DDFFFF;
+    background-image: linear-gradient(to right, #5D99FF 0%, #136FFF 100%);
 }
 
 .ranking_table{
     width:750px;
     border: none !important;
-    margin-top: 30px;
 }
 
 .ranking_th {
@@ -541,6 +545,15 @@ header {
 .color_bronze {
     color: #B87333;
 }
+
+
+/* 不正解画面 */
+.double-button-area{
+    display: flex;
+    justify-content: center;
+    gap: 50px; /* ボックス間のスペース */
+}
+
 
 /* 各種ボタン */
 button{
@@ -573,7 +586,7 @@ button{
 }
 
 .button_choice{
-    background-color:#5C73DB;
+    background-color:#005FFF;
 }
 
 .button_input{
@@ -628,8 +641,7 @@ button{
 }
 
 .button_return{
-    margin-top: 50px;
-    margin-bottom: 20px;
+    margin-top: 30px;
     width: 220px;
     height: 50px;
     font-size: 20px;
@@ -645,4 +657,14 @@ button{
     line-height: 10px;
     margin: 10px auto;
     background-color: #ccc;
+}
+
+.button_retry{
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+    color:black;
+    line-height: 10px;
+    margin: 10px auto;
+    background-color: #8EB8FF;
 }

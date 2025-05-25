@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}再チャレンジ{% endblock %}
+
+{% block content %}
+
+    <div class="standart-box">
+
+        <!-- 問題と選択肢の表示 -->
+        <div class="explanation-area question-text">
+            【問題 {{ number }}】
+            <br>
+            {{ incorrect.question.question|linebreaksbr  }}
+        </div>
+
+        <form id="question-form" method="post" action="{% url 'history:result' %}">
+            {% csrf_token %}
+
+            <input type="hidden" name="choice" id="choice-input">
+            <input type="hidden" name="rank" value="{{ incorrect.question.rank_id }}">
+            <input type="hidden" name="incorrect" value="{{ incorrect.id }}">
+
+            <!-- 選択問題の場合、4択を表示 -->
+            {% if incorrect.question.rank_id == 1 %}
+
+                <div class="choices">
+                    {% for i, choice in choices %}
+                        <div class="choice" onclick="submitChoice('{{ choice }}')">
+                            {{ choice }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+            <!-- 記述問題の場合、コマンド入力欄を表示 -->
+            {% elif incorrect.question.rank_id == 2 %}
+                <div class="command_input">
+                    <label for="input">コマンド入力：</label>
+                    <input type="text" name="input" id="input" class="command_input_area" autofocus>
+                </div>
+                <div class="button-center">
+                    <button type="submit">回答</button>
+                </div>
+            {% endif %}
+            
+        </form>
+
+        <a href="{% url 'history:incorrect' %}">
+            <button class="button_return">不正解一覧に戻る</button>
+        </a>
+
+    </div>
+
+    <script>
+
+        // 選択肢を押下したときの処理
+        function submitChoice(choiceIndex) {
+
+            // 押下した選択肢（=ユーザ回答）を取得
+            document.getElementById("choice-input").value = choiceIndex;
+
+            // フォーム送信
+            document.getElementById("question-form").submit();
+        }
+
+    </script>
+
+{% endblock content %}

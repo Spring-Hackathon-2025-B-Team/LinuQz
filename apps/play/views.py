@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from datetime import timedelta
 from random import sample
@@ -6,10 +7,11 @@ from uuid import UUID
 from django.conf import settings
 from apps.question.models import Question
 from apps.user.models import User
-from .models import History
+from .models import History, Incorrect
 
 
 # 問題開始画面
+@login_required
 def start_view(request):
 
     rank = request.GET.get('rank', 'choice')
@@ -28,6 +30,7 @@ def start_view(request):
 
 
 # 初期化処理（問題開始時に1度だけ実施）
+@login_required
 def question_init(request):
 
     rank = request.GET.get('rank', 'choice')
@@ -65,6 +68,7 @@ def question_init(request):
 
 
 # 問題実施処理（問題ごとに呼び出される）
+@login_required
 def question_view(request):
 
     # ランクを取得
@@ -165,6 +169,7 @@ def question_view(request):
 
 
 # 結果画面
+@login_required
 def result_view(request):
 
     # ランクを取得
@@ -182,6 +187,9 @@ def result_view(request):
 
     # 結果配列を初期化
     results = []
+
+    # セッションで管理する不正解配列の初期化
+    request.session["incorrects"] = []
 
     # 各種変数を初期化
     score = 0  # 得点
@@ -223,6 +231,10 @@ def result_view(request):
                 score += settings.RANK_2_INCORRECT_POINT  # 得点から減算（input用のポイント）
                 incorrect_point += settings.RANK_2_INCORRECT_POINT  # 不正解ポイントを減算（input用のポイント）
 
+            # 不正解配列に不正解だった問題のidを追加
+            request.session["incorrects"].append(str(question.id))
+
+
         # 回答が「-1」の場合
         if user_answer == -1:
             user_text = "未回答"  # 結果画面の回答欄に「未回答」を設定
@@ -242,7 +254,7 @@ def result_view(request):
         })
 
     # セッションから残り時間を取得
-    remaining_time = request.session.pop("remaining_time", 0)
+    remaining_time = request.session.get("remaining_time", 0)
 
     # 得点に残り時間を加算
     score += remaining_time
@@ -278,6 +290,7 @@ def result_view(request):
 
 
 # 問題実施中に制限時間に達した場合の強制終了処理
+@login_required
 def result_force(request):
 
     # ユーザ回答数を取得
@@ -294,12 +307,15 @@ def result_force(request):
 
 
 # 解説画面
+@login_required
 def answer_view(request,pk):
 
     question = get_object_or_404(Question, pk=pk)
     return render(request, 'play/answer.html', {'question': question})
 
+
 # 経験値取得画面
+@login_required
 def exp_view(request):
 
     # セッションからランクを取得
@@ -314,9 +330,12 @@ def exp_view(request):
     # セッションから得点を取得
     score = request.session.get("score")
 
-    # ユーザの現在のレベルと経験値を取得
+    # ユーザの現在のレベルを取得
+    # （tmp_levelを経由しているのは、request.user.levelを変えるとcurrent_levelも変わることを防ぐため）
     tmp_level = request.user.level
     current_level = tmp_level
+
+    # ユーザの現在の経験値を取得
     current_exp = request.user.exp
 
     # 経験値に得点を加算
@@ -325,15 +344,28 @@ def exp_view(request):
     # 次のレベルに必要な経験値を算出
     next_exp = current_level ** 2 * settings.EXP_COEFFICIENT
 
-    # 次のレベルまでに必要な経験値を初期化
+    # 次のレベルまでの残り経験値を初期化
     left_exp = 0
 
-    if total_exp >= next_exp:
-        new_level = current_level + 1
+    # レベル5（最大レベル）の場合はチェックしない
+    if current_level != 5:
+
+        # 経験値が次のレベルに必要な経験値以上の場合
+        if total_exp >= next_exp:
+
+            # レベルアップ
+            new_level = current_level + 1
+
+        else:
+
+            # レベルアップ据え置き
+            new_level = current_level
+
+            # 次のレベルまでの残り経験値を算出
+            left_exp = next_exp - total_exp
+
     else:
         new_level = current_level
-        # 次のレベルまでに必要な経験値を算出
-        left_exp = next_exp - total_exp
 
     # ユーザ情報を更新（レベル・経験値）
     request.user.level = new_level
@@ -345,10 +377,25 @@ def exp_view(request):
 
     # 実施履歴テーブルの更新
     History.objects.create(
-        user_id=user_id,
+        user=user_id,
         rank_id=rank_id,
         score=score,
     )
+
+    # 不正解配列(不正解だった問題のid)をセッションから取得(文字列型で格納しているのでuuid型に戻す)
+    incorrects_str = request.session.get("incorrects", [])  
+    incorrects_ids = [UUID(s) for s in incorrects_str]
+
+    for incorrect_id in incorrects_ids:
+
+        # 問題id(uuid)を取得
+        question_id = Question.objects.get(id=incorrect_id)
+
+        # 不正解テーブルの更新
+        Incorrect.objects.create(
+            user=user_id,
+            question=question_id,
+        )
 
     # 経験値取得画面を表示
     return render(request, "play/exp.html", {

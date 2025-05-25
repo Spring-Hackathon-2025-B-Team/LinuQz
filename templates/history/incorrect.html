@@ -1,1 +1,44 @@
-{% for incorrect in incorrect_list %}{{ incorrect.question.rank_id }}-{{ incorrect.question.question }}{% endfor %}
+{% extends 'base.html' %}
+{% block title %}不正解一覧{% endblock %}
+
+{% block content %}
+
+    <div class="question_container">
+
+        <h1>不正解一覧</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th width="50px">カテゴリ</th>
+                    <th width="300px">問題</th>
+                    <th width="100px">再チャレンジ</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for incorrect in incorrect_list %}
+                    <tr>
+                        <td>
+                            {% if incorrect.question.rank_id == 1 %}
+                                <span class="rank_choice_design">{{ RANK_1_NAME }}</span>
+                            {% elif incorrect.question.rank_id == 2 %}
+                                <span class="rank_input_design">{{ RANK_2_NAME }}</span>
+                            {% endif %}
+                        </td>
+                        <td class="td_item_left">{{ incorrect.question.question }}</td>
+                        <td>
+                            <a href="{% url 'history:retry' incorrect.pk %}">
+                                <button class="button_retry">再チャレンジする</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{% url 'home:index' %}">
+            <button class="button_return">トップページに戻る</button>
+        </a>
+
+    </div>
+{% endblock content %}

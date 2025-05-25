@@ -7,7 +7,7 @@
     {% endif %}
     {{ incorrect.question.question }}        
     <form method="get" action="{% url 'history:retry' incorrect.question.id %}">
-        <button>{{ rank_display }}再チャレンジ</button>
+        <button>再チャレンジ</button>
     </form>
   {% endfor %}
 {% else %}

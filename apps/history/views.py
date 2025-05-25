@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, DeleteView
+from django.urls import reverse_lazy
 from .models import Incorrects
 from apps.play.models import History
 from apps.question.models import Question
@@ -90,3 +91,17 @@ class RetryQuestion(DetailView):
     template_name = 'history/retry.html'
     model = Question
     context_object_name = 'question' 
+
+# 再チャレンジ解答画面
+class RetryAnswer(DetailView):
+    """再チャレンジ問題を取得するビュー"""
+    template_name = 'history/retry-answer.html'
+    model = Question
+    context_object_name = 'question'
+
+# 不正解問題を一覧から削除
+class IncorrectDelete(DeleteView):
+    """再チャレンジ問題を削除するビュー"""
+    model = Question
+    success_url = reverse_lazy('history:incorrect')
+    context_object_name = 'question'

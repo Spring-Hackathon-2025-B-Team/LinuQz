@@ -1,1 +1,32 @@
-{{ question.question }}_{{ question.choice_1 }}
+{% extends 'base.html' %}
+{% block title %}問題実施{% endblock %}
+
+{% block content %}
+
+    <div class="standart-box">
+
+        <!-- 問題と選択肢の表示 -->
+        <div class="explanation-area question-text">
+            【問題】
+            <br>
+            {{ question.question|linebreaksbr  }}
+        </div>
+
+        <div class="choices">
+            <a class="choice" href="{% url 'history:retry-answer' question.id %}">
+                {{ question.choice_1 }}
+            </a>
+            <a class="choice" href="{% url 'history:retry-answer' question.id %}">
+                {{ question.choice_2 }}
+            </a>
+            <a class="choice" href="{% url 'history:retry-answer' question.id %}">
+                {{ question.choice_3 }}
+            </a>
+            <a class="choice" href="{% url 'history:retry-answer' question.id %}">
+                {{ question.choice_4 }}
+            </a>
+        </div>
+
+    </div>
+
+{% endblock content %}

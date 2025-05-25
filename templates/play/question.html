@@ -37,15 +37,7 @@
                 <div class="choices">
                     {% for i, choice in choices %}
                         <div class="choice" onclick="submitChoice('{{ choice }}')">
-                            {% if i == 0 %}
-                                {{ choice }}
-                            {% elif i == 1 %}
-                                {{ choice }}
-                            {% elif i == 2 %}
-                                {{ choice }}
-                            {% elif i == 3 %}
-                                {{ choice }}
-                            {% endif %}
+                            {{ choice }}
                         </div>
                     {% endfor %}
                 </div>

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}トップ{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="box">
+            <p>問題管理</p>
+            <a href="{% url 'question:index' %}">
+                <button class="button_home">問題一覧</button>
+            </a>
+            <a href="{% url 'question:create' %}">
+                <button class="button_home">問題作成</button>
+            </a>
+        </div>
+        <div class="box">
+            <p>各種管理</p>
+            <a href="{% url 'user:userlist' %}">
+                <button class="button_home">ユーザ一覧</button>
+            </a>
+
+            <a href="">
+                <button class="button_home">各種設定</button>
+            </a>
+
+        </div>
+    </div>
+
+{% endblock content %}

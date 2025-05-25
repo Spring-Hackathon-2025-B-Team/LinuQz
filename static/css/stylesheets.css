@@ -242,6 +242,13 @@ header {
     font-weight: bold;
 }
 
+.center_item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /* 問題実施画面 */
 .question-box {

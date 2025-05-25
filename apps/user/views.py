@@ -1,8 +1,11 @@
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.views.generic import TemplateView, CreateView
 from django.contrib.auth.views import LoginView as BaseLoginView, LogoutView as BaseLogoutView
 from django.urls import reverse_lazy
 from .forms import SignUpForm, LoginForm
+from .models import User
 
 # ユーザー登録ビュー
 class SignupView(CreateView):
@@ -27,3 +30,12 @@ class LoginView(BaseLoginView):
 # ユーザーログアウトビュー
 class LogoutView(BaseLogoutView):
     success_url = reverse_lazy("user:login")
+
+
+# ユーザ一覧画面
+@login_required
+def userlist_view(request):
+
+    # ユーザテーブルから全ユーザ取得(作成日時の降順)
+    users = User.objects.all().order_by('-created_at')
+    return render(request, 'user/userlist.html', {'users': users})

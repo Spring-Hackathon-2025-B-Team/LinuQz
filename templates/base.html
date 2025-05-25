@@ -37,32 +37,33 @@
     
         </header>
 
-        <!-- ログインしている場合のみ表示 -->
-        {% if user.is_authenticated %}
-
             <div class="user_info">
-                ユーザ名：{{ user.name }}
 
-                <!-- アカウント編集 -->
-                <a href="{% url 'home:account' %}">
-                    <img src="{% static 'images/user_edit.png' %}" width="30" height="30" class="account_icon">
-                </a>
-        
-                <!-- レベルとアイコン表示（レベルに応じてアイコンを出し分け） -->
-                　　　Lv.{{ user.level }}　
-                {% if user.level == 1 %}
-                    <img src="{% static 'images/level1.png' %}" width="55" height="55" class="chara_icon">
-                {% elif user.level == 2 %}
-                    <img src="{% static 'images/level2.png' %}" width="55" height="55" class="chara_icon">
-                {% elif user.level == 3 %}
-                    <img src="{% static 'images/level3.png' %}" width="55" height="55" class="chara_icon">
-                {% elif user.level == 4 %}
-                    <img src="{% static 'images/level4.png' %}" width="55" height="55" class="chara_icon">
-                {% elif user.level == 5 %}
-                    <img src="{% static 'images/level5.png' %}" width="55" height="55" class="chara_icon">
-                {% endif %}            
+                <!-- ログイン済み、かつ管理者でない場合のみ表示 -->
+                {% if user.is_authenticated and not user.is_staff %}
+
+                    ユーザ名：{{ user.name }}
+
+                    <!-- アカウント編集 -->
+                    <a href="{% url 'home:account' %}">
+                        <img src="{% static 'images/user_edit.png' %}" width="30" height="30" class="account_icon">
+                    </a>
+            
+                    <!-- レベルとアイコン表示（レベルに応じてアイコンを出し分け） -->
+                    　　　Lv.{{ user.level }}　
+                    {% if user.level == 1 %}
+                        <img src="{% static 'images/level1.png' %}" width="55" height="55" class="chara_icon">
+                    {% elif user.level == 2 %}
+                        <img src="{% static 'images/level2.png' %}" width="55" height="55" class="chara_icon">
+                    {% elif user.level == 3 %}
+                        <img src="{% static 'images/level3.png' %}" width="55" height="55" class="chara_icon">
+                    {% elif user.level == 4 %}
+                        <img src="{% static 'images/level4.png' %}" width="55" height="55" class="chara_icon">
+                    {% elif user.level == 5 %}
+                        <img src="{% static 'images/level5.png' %}" width="55" height="55" class="chara_icon">
+                    {% endif %}            
+                {% endif %}
             </div>
-        {% endif %}
 
         {% block content %}{% endblock content %}
     </body>

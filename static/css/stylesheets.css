@@ -281,8 +281,8 @@ header {
 }
 
 .question-text{
-    height:120px;
-    background-color: #D9E5FF;
+    height:150px;
+    background-color: #D7EEFF;
 }
 
 .timer-area{
@@ -548,6 +548,14 @@ header {
 
 
 /* 不正解画面 */
+.incorrect_container{
+    margin:50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .double-button-area{
     display: flex;
     justify-content: center;

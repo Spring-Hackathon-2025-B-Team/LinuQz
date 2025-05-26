@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.views.generic import TemplateView, CreateView
@@ -39,3 +39,11 @@ def userlist_view(request):
     # ユーザテーブルから全ユーザ取得(作成日時の降順)
     users = User.objects.all().order_by('-created_at')
     return render(request, 'user/userlist.html', {'users': users})
+
+# ユーザ削除（画面なし）
+@login_required
+def delete_view(request,pk):
+    # 該当レコードがなければ404エラーを返す
+    user = get_object_or_404(User, pk=pk)
+    user.delete()
+    return redirect('user:userlist') 

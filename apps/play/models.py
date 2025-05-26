@@ -32,7 +32,7 @@ class History(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        #明示的にテーブル名を指定
+        #明示的にテーブル名を指定（これをしないと、「アプリ名(小文字)_モデル名(小文字)」で自動命名される）
         db_table = 'histories'
 
 
@@ -41,8 +41,10 @@ class Incorrect(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
+    # ユーザID（外部キー）
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    # 問題ID（外部キー）
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
     # 作成日時（auto_now_add=True で「レコード作成時に自動セット」）
@@ -57,5 +59,5 @@ class Incorrect(models.Model):
         ]
 
     class Meta:
-        #明示的にテーブル名を指定
+        #明示的にテーブル名を指定（これをしないと、「アプリ名(小文字)_モデル名(小文字)」で自動命名される）
         db_table = 'incorrects'

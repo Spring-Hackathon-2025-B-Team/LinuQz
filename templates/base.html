@@ -34,13 +34,35 @@
                     </a>
                 {% endif %}
             </div>
-    
+
+            {% if user.is_authenticated %}
+                <!-- ハンバーガーメニュー部分 -->
+                <div class="nav">
+                
+                    <!-- ハンバーガーメニューの表示・非表示を切り替えるチェックボックス -->
+                    <input id="drawer_input" class="drawer_hidden" type="checkbox">
+                
+                    <!-- ハンバーガーアイコン -->
+                    <label for="drawer_input" class="drawer_open"><span></span></label>
+                
+                    <!-- メニュー -->
+                    <nav class="nav_content">
+                        <form method="get" action="{% url 'play:start' %}">
+                            <ul class="nav_list">
+                                <li class="nav_item"><button class="menu-button" name="rank" value="choice">選択問題</button></li>
+                                <li class="nav_item"><button class="menu-button" name="rank" value="input">記述問題</button></li>
+                            </ul>
+                        </form>
+                    </nav>        
+                </div>            
+            {% endif %}
+
         </header>
 
             <div class="user_info">
 
-                <!-- ログイン済み、かつ管理者でない場合のみ表示 -->
-                {% if user.is_authenticated and not user.is_staff %}
+                <!-- ログイン済みの場合、表示 -->
+                {% if user.is_authenticated %}
 
                     ユーザ名：{{ user.name }}
 
@@ -48,21 +70,28 @@
                     <a href="{% url 'home:account' %}">
                         <img src="{% static 'images/user_edit.png' %}" width="30" height="30" class="account_icon">
                     </a>
-            
-                    <!-- レベルとアイコン表示（レベルに応じてアイコンを出し分け） -->
-                    　　　Lv.{{ user.level }}　
-                    {% if user.level == 1 %}
-                        <img src="{% static 'images/level1.png' %}" width="55" height="55" class="chara_icon">
-                    {% elif user.level == 2 %}
-                        <img src="{% static 'images/level2.png' %}" width="55" height="55" class="chara_icon">
-                    {% elif user.level == 3 %}
-                        <img src="{% static 'images/level3.png' %}" width="55" height="55" class="chara_icon">
-                    {% elif user.level == 4 %}
-                        <img src="{% static 'images/level4.png' %}" width="55" height="55" class="chara_icon">
-                    {% elif user.level == 5 %}
-                        <img src="{% static 'images/level5.png' %}" width="55" height="55" class="chara_icon">
-                    {% endif %}            
+
+                    <!-- 管理者でない場合、表示 -->
+                    {% if not user.is_staff %}
+                        
+                        <!-- レベルとアイコン表示（レベルに応じてアイコンを出し分け） -->
+                        　　　Lv.{{ user.level }}　
+                        {% if user.level == 1 %}
+                            <img src="{% static 'images/level1.png' %}" width="55" height="55" class="chara_icon">
+                        {% elif user.level == 2 %}
+                            <img src="{% static 'images/level2.png' %}" width="55" height="55" class="chara_icon">
+                        {% elif user.level == 3 %}
+                            <img src="{% static 'images/level3.png' %}" width="55" height="55" class="chara_icon">
+                        {% elif user.level == 4 %}
+                            <img src="{% static 'images/level4.png' %}" width="55" height="55" class="chara_icon">
+                        {% elif user.level == 5 %}
+                            <img src="{% static 'images/level5.png' %}" width="55" height="55" class="chara_icon">
+                        {% endif %}            
+
+                    {% endif %}
+
                 {% endif %}
+
             </div>
 
         {% block content %}{% endblock content %}

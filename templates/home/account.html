@@ -13,6 +13,11 @@
                     <label for="name">ユーザ名：</label>
                     <input type="text" id="name" name="name" value="{{ user.name }}" class="input_item_text">
                 </div>
+                {% if error_message %}
+                    <div class="text-error">
+                        {{ error_message }}
+                    </div>
+                {% endif %}
 
                 <button type="submit" class="button_decision">更新</button>
             </form>

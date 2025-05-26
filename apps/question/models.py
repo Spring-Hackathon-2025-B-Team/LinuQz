@@ -42,7 +42,7 @@ class Question(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        #明示的にテーブル名を指定
+        #明示的にテーブル名を指定（これをしないと、「アプリ名(小文字)_モデル名(小文字)」で自動命名される）
         db_table = 'questions'
 
     def get_choices(self):

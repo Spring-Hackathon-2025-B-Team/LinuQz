@@ -102,7 +102,7 @@
                     <br>
                     {{ form.explanation }}
                     {% if form.explanation.errors %}
-                        <div class="text-danger small">
+                        <div class="text-error small">
                             {{ form.explanation.errors.as_text }}
                         </div>
                     {% endif %}
@@ -113,7 +113,7 @@
                 <button type="submit" class="button_decision">更新</button>
             </form>
 
-            <a href="{% url 'question:index' %}" class="moving_link">
+            <a href="{% url 'question:index' %}">
                 <button class="button_return">問題一覧に戻る</button>
             </a>
             <br><br>

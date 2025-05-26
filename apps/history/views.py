@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
 from apps.play.models import History, Incorrect
-from apps.question.models import Question
 from django.conf import settings
+
 
 # ランキング表示画面
 @method_decorator(login_required, name='dispatch')

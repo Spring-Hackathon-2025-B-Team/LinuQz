@@ -13,7 +13,7 @@
                     <th width="80px">ユーザ名</th>
                     <th width="200px">メールアドレス</th>
                     <th width="150px">作成日時</th>
-                    <th width="60px">管理者権限</th>
+                    <th width="40px">管理者</th>
                     <th width="50px">削除</th>
                 </tr>
             </thead>
@@ -23,9 +23,13 @@
                         <td class="td_item_left">{{ user.name }}</td>
                         <td class="td_item_left">{{ user.email }}</td>
                         <td>{{ user.created_at|date:"Y年n月j日 G時i分" }}</td>
-                        <td>{{ user.is_staff }}</td>
                         <td>
-                            <a href="#" class="button_delete" onclick="return confirm('このユーザを削除してもよろしいですか？');">
+                            {% if user.is_staff == True %}
+                                ●
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'user:delete' user.pk %}" class="button_delete" onclick="return confirm('このユーザを削除してもよろしいですか？');">
                                 削除
                             </a>
                         </td>

@@ -51,13 +51,13 @@
                     </div>
                     <div class="">
                         {% if new_level == 2 %}
-                            <img src="{% static 'images/level2.png' %}" width="100" height="100">
+                            <img id="dot-sprite2" src="{% static 'images/level2.png' %}" width="100" height="100">
                         {% elif new_level == 3 %}
-                            <img src="{% static 'images/level3.png' %}" width="100" height="100">
+                            <img id="dot-sprite3" src="{% static 'images/level3.png' %}" width="100" height="100">
                         {% elif new_level == 4 %}
-                            <img src="{% static 'images/level4.png' %}" width="100" height="100">
+                            <img id="dot-sprite4" src="{% static 'images/level4.png' %}" width="100" height="100">
                         {% elif new_level == 5 %}
-                            <img src="{% static 'images/level5.png' %}" width="100" height="100">
+                            <img id="dot-sprite5" src="{% static 'images/level5.png' %}" width="100" height="100">
                         {% endif %}            
                     </div>
                 </div>
@@ -70,5 +70,48 @@
         </a>
 
     </div>
+
+    <script>
+        // レベル2になった時のアニメーション（2つの画像を交互に表示）
+        const frames2 = ["{% static 'images/level2.png' %}", "{% static 'images/level2-2.png' %}"];
+        let index2 = 0;
+        const sprite2 = document.getElementById("dot-sprite2");
+
+        setInterval(() => {
+            index2 = (index2 + 1) % frames2.length;
+            sprite2.src = frames2[index2];
+        }, 500); // 0.5秒ごとに切り替え
+
+        // レベル3になった時のアニメーション（2つの画像を交互に表示）
+        const frames3 = ["{% static 'images/level3-2.png' %}", "{% static 'images/level3-3.png' %}"];
+        let index3 = 0;
+        const sprite3 = document.getElementById("dot-sprite3");
+
+        setInterval(() => {
+            index3 = (index3 + 1) % frames3.length;
+            sprite3.src = frames3[index3];
+        }, 500); // 0.5秒ごとに切り替え
+
+        // レベル4になった時のアニメーション（2つの画像を交互に表示）
+        const frames4 = ["{% static 'images/level4.png' %}", "{% static 'images/level4-2.png' %}"];
+        let index4 = 0;
+        const sprite4 = document.getElementById("dot-sprite4");
+
+        setInterval(() => {
+            index4 = (index4 + 1) % frames4.length;
+            sprite4.src = frames4[index4];
+        }, 500); // 0.5秒ごとに切り替え
+
+        // レベル5になった時のアニメーション（2つの画像を交互に表示）
+        const frames5 = ["{% static 'images/level5.png' %}", "{% static 'images/level5-2.png' %}"];
+        let index5 = 0;
+        const sprite5 = document.getElementById("dot-sprite5");
+
+        setInterval(() => {
+            index5 = (index5 + 1) % frames5.length;
+            sprite5.src = frames5[index5];
+        }, 500); // 0.5秒ごとに切り替え
+
+    </script>    
 
 {% endblock content %}

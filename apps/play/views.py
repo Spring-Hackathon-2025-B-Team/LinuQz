@@ -392,7 +392,9 @@ def exp_view(request):
         question_id = Question.objects.get(id=incorrect_id)
 
         # 不正解テーブルの更新
-        Incorrect.objects.create(
+        # get_or_create：指定した条件に一致するオブジェクトがあれば取得し、なければ作成する
+        # （既に存在するuserとquestionの組み合わせがあればテーブル更新しない）
+        Incorrect.objects.get_or_create(
             user=user_id,
             question=question_id,
         )

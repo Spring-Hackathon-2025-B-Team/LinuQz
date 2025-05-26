@@ -59,9 +59,6 @@ header {
     z-index: 1000;
 }
 
-.logo{
-}
-
 .logout{
     font-size:24px;
     font-weight: bold;
@@ -515,6 +512,7 @@ header {
     margin-top: 20px;
     margin-bottom: 20px;
     line-height: 1px;
+    color:white;
     font-size: 30px;
     font-weight: bold;
     border: 1px solid #AAFFFF;
@@ -567,6 +565,18 @@ header {
     display: flex;
     justify-content: center;
     gap: 50px; /* ボックス間のスペース */
+}
+
+/* バリデーション */
+.text-error{
+    color:red;
+    font-size: 18px;
+    font-weight: bold;
+    list-style: none;
+}
+
+ul.errorlist {
+    list-style: none;  /* 黒ポチを消す */
 }
 
 
@@ -682,4 +692,355 @@ button{
     line-height: 10px;
     margin: 10px auto;
     background-color: #8EB8FF;
+}
+
+
+/* PCではハンバーガーメニューとその中身を非表示にする */
+.nav {
+    display: none;
+}
+
+.drawer_hidden {
+    display: none;
+}
+
+
+/* レスポンシブ対応（スマホ用） */
+@media (max-width: 670px){
+
+    body {
+        background-color: white;
+        margin: 0 auto;
+        width: 100%;
+        height: auto;
+        font-family: sans-serif;
+        border: 1px black solid;
+    }
+
+    header {
+        width:100%;
+        margin:0 auto;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background-color: #38b6ff;
+        color: black;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    .logo img{
+        width:180px ;
+        height:50px ;
+    }
+
+    .logout{
+        font-size:18px;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+    .nav{
+        display: block;
+    }
+
+    /* チェックボックスを非表示にする */
+    .drawer_hidden {
+        display: none;
+    }
+
+    /* ハンバーガーアイコンの設置スペース */
+    .drawer_open {
+        display: flex;
+        height: 60px;
+        width: 60px;
+        margin-right: 20px;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 100;/* 重なり順を一番上にする */
+        cursor: pointer;
+    }
+
+    /* ハンバーガーメニューのアイコン */
+    .drawer_open span,
+    .drawer_open span:before,
+    .drawer_open span:after {
+        content: '';
+        display: block;
+        height: 3px;
+        width: 25px;
+        border-radius: 3px;
+        background: #333;
+        transition: 0.5s;
+        position: absolute;
+    }
+
+    /* 三本線の一番上の棒の位置調整 */
+    .drawer_open span:before {
+        bottom: 8px;
+    }
+
+    /* 三本線の一番下の棒の位置調整 */
+    .drawer_open span:after {
+        top: 8px;
+    }
+
+    /* アイコンがクリックされたら真ん中の線を透明にする */
+    #drawer_input:checked ~ .drawer_open span {
+        background: rgba(255, 255, 255, 0);
+    }
+
+    /* アイコンがクリックされたらアイコンが×印になように上下の線を回転 */
+    #drawer_input:checked ~ .drawer_open span::before {
+        bottom: 0;
+        transform: rotate(45deg);
+    }
+
+    #drawer_input:checked ~ .drawer_open span::after {
+        top: 0;
+        transform: rotate(-45deg);
+    }
+    
+    /* メニューのデザイン*/
+    .nav_content {
+        width: 50%;
+        height: 200px;
+        position: fixed;
+        top: 0;
+        left: 100%; /* メニューを画面の外に飛ばす */
+        z-index: 99;
+        background-color: #EEEEEE;
+        border: 1px solid #CCCCCC;
+        transition: .5s;
+    }
+
+    /* メニュー黒ポチを消す */
+    .nav_list {
+        list-style: none;
+    }
+
+    /* アイコンがクリックされたらメニューを表示 */
+    #drawer_input:checked ~ .nav_content {
+        left: 50%;/* メニューを画面に入れる */
+    }    
+
+    .user_info{
+        margin-top: 70px;
+        width:100%;
+        color:black;
+        font-size:18px;
+        font-weight: bold;
+        position: relative;
+        text-align: center;
+    }
+
+    .account_icon{
+        display: none;
+    }   
+
+    .chara_icon{
+        display: none;
+    }
+
+    .container {
+        margin-bottom: 50px;
+    }
+
+    .box {
+        width: 300px;
+        height: 250px;
+        padding-bottom:50px ;
+        border: 2px solid black;
+        background-color: #D7EEFF;
+        border-radius: 8px;
+        box-shadow: 2px 2px 2px black;
+    }
+
+    .box p{
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .box-achievements{
+        display: none;
+    }
+
+    .menu-button{
+        margin-top: 20px;
+        width: auto;
+        height: auto;
+        background: none;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        color: black;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .auth-container {
+        margin-top: 100px;
+        margin-bottom: 50px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .auth-box{
+        width: 300px;
+        padding-bottom:50px;
+        border: 2px solid black;
+        background-color: #D7EEFF;
+        border-radius: 8px;
+        box-shadow: 2px 2px 2px black;
+    }
+
+    .auth-box p{
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .input_item{
+        font-size:20px;
+        font-weight: bold;
+    }
+
+    .input_item_text{
+        height:30px;
+        font-size:20px;
+        border-radius: 5px;
+        border: 2px solid #ccc;
+    }
+
+    .moving_link{
+        margin-top:20px;
+        font-size:20px;
+        font-weight: bold;
+        color:#3C58D6;
+    }
+
+    .standart-box {
+        width: 100%;
+        margin-top:30px;
+        padding-bottom:60px;
+    }
+
+    .explanation-area{
+        width: 300px;
+        font-size: 14px;
+    }
+
+    .timer-area{
+        width: 300px;
+    }
+
+    .question-text{
+        height:150px;
+    }
+
+    .choices {
+        gap: 10px;
+        width: 300px;
+    }
+
+    .choice {
+        padding: 15px 25px;
+        min-width: 120px;
+        font-size: 15px;
+    }
+
+    .command_input{
+        width: 300px;
+        margin: 30px auto;
+        font-size:24px;
+    }
+
+    .command_input_area{
+        width: 200px;
+        height: 30px;
+        font-size:26px;
+    }
+
+    #timer-bar {
+        height: 15px;
+        margin-top: 10px;
+    }
+
+    .remaining_time{
+        font-size: 15px;
+    }
+
+    .point_total{
+        font-size: 20px;
+    }
+
+    .point_detail{
+        width:220px;
+        font-size: 15px;
+        text-align: left;
+    }
+
+    .title_name{
+        font-size: 20px;
+    }
+
+    .result-box {
+        padding: 30px;
+        width: 300px;
+        font-size: 20px;
+        margin: 20px auto;
+        margin-top: 20px;
+    }
+
+    .correct_mark{
+        font-size: 15px;
+    }
+
+    .incorrect_mark{
+        font-size: 15px;
+    }
+
+    table{
+        width: 300px;
+        margin:20px auto;
+    }
+
+    .sp-none-area{
+        display: none;
+    }
+
+    .button_answer{
+        width: 150px;
+        height: 30px;
+        font-size: 14px;
+        line-height: 10px;
+        margin: 10px auto;
+    }
+
+    .choice_answer {
+        font-size: 14px;
+    }
+
+    /* 経験値取得画面 */
+    .exp_message{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+
+    .container_levelup {
+        gap: 20px; /* ボックス間のスペース */
+        margin-top: 30px;
+    }
+
 }

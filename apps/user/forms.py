@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User
 
-# カスタムユーザーモデル用のユーザー登録フォーム
+# カスタムユーザーモデル用のユーザ登録フォーム
 class SignUpForm(UserCreationForm):
 
     usable_password = None  

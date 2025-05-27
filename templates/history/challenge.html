@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}実施履歴{% endblock %}
+
+{% block content %}
+
+    <div class="incorrect_container">
+
+        <h1>実施履歴</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th width="50px">カテゴリ</th>
+                    <th width="50px">得点</th>
+                    <th width="130px">実施日時</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for challenge in challenge_list %}
+                    <tr height="40">
+                        <td>
+                            {% if challenge.rank_id == 1 %}
+                                <span class="rank_choice_design">{{ RANK_1_NAME }}</span>
+                            {% elif challenge.rank_id == 2 %}
+                                <span class="rank_input_design">{{ RANK_2_NAME }}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ challenge.score }}</td>
+                        <td>{{ challenge.created_at|date:"Y年n月j日 G時i分" }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{% url 'home:index' %}">
+            <button class="button_return">トップページに戻る</button>
+        </a>
+
+    </div>
+{% endblock content %}

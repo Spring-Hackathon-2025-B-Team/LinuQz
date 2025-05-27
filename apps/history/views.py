@@ -68,6 +68,30 @@ class RankingList(ListView):
         return context
 
 
+# 実施履歴画面
+@method_decorator(login_required, name='dispatch')
+class ChallengeList(ListView):
+
+    """実施履歴を取得するためのビュー"""
+    template_name = 'history/challenge.html'
+    model = History
+    context_object_name = 'challenge_list'
+
+    def get_queryset(self):
+
+        """ログイン中のユーザーの不正解一覧を取得"""
+        queryset = History.objects.filter(user_id=self.request.user).order_by('-created_at')
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # 追加の変数を渡す
+        context['RANK_1_NAME'] = settings.RANK_1_NAME
+        context['RANK_2_NAME'] = settings.RANK_2_NAME
+        return context
+
+
+
 # 不正解一覧画面
 @method_decorator(login_required, name='dispatch')
 class IncorrectList(ListView):

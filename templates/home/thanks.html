@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}サンクス{% endblock %}
+
+{% block content %}
+
+    <div class="standart-box">
+
+        <div class="exp_message">
+                ご清聴ありがとうございました！
+        </div>
+
+        <div class="bonus-contents">
+            <img id="dot-sprite1" src="{% static 'images/level1.png' %}" width="100" height="100">
+            <img id="dot-sprite2" src="{% static 'images/level2.png' %}" width="100" height="100">
+            <img id="dot-sprite3" src="{% static 'images/level3.png' %}" width="100" height="100">
+            <img id="dot-sprite4" src="{% static 'images/level4.png' %}" width="100" height="100">
+            <img id="dot-sprite5" src="{% static 'images/level5.png' %}" width="100" height="100">
+        </div>
+
+        <a href="{% url 'home:index' %}">
+            <button class="button_return">次のハッカソンへ</button>
+        </a>
+
+    </div>
+
+    <script>
+        // レベル1のアニメーション（2つの画像を交互に表示）
+        const frames1 = ["{% static 'images/level1.png' %}", "{% static 'images/thanks1.png' %}"];
+        let index1 = 0;
+        const sprite1 = document.getElementById("dot-sprite1");
+
+        setInterval(() => {
+            index1 = (index1 + 1) % frames1.length;
+            sprite1.src = frames1[index1];
+        }, 800);
+
+        // レベル2のアニメーション（2つの画像を交互に表示）
+        const frames2 = ["{% static 'images/level2.png' %}", "{% static 'images/thanks2.png' %}"];
+        let index2 = 0;
+        const sprite2 = document.getElementById("dot-sprite2");
+
+        setInterval(() => {
+            index2 = (index2 + 1) % frames2.length;
+            sprite2.src = frames2[index2];
+        }, 800);
+
+        // レベル3のアニメーション（2つの画像を交互に表示）
+        const frames3 = ["{% static 'images/level3.png' %}", "{% static 'images/thanks3.png' %}"];
+        let index3 = 0;
+        const sprite3 = document.getElementById("dot-sprite3");
+
+        setInterval(() => {
+            index3 = (index3 + 1) % frames3.length;
+            sprite3.src = frames3[index3];
+        }, 800);
+
+        // レベル4のアニメーション（2つの画像を交互に表示）
+        const frames4 = ["{% static 'images/level4.png' %}", "{% static 'images/thanks4.png' %}"];
+        let index4 = 0;
+        const sprite4 = document.getElementById("dot-sprite4");
+
+        setInterval(() => {
+            index4 = (index4 + 1) % frames4.length;
+            sprite4.src = frames4[index4];
+        }, 800);
+
+        // レベル5のアニメーション（2つの画像を交互に表示）
+        const frames5 = ["{% static 'images/level5.png' %}", "{% static 'images/thanks5.png' %}"];
+        let index5 = 0;
+        const sprite5 = document.getElementById("dot-sprite5");
+
+        setInterval(() => {
+            index5 = (index5 + 1) % frames5.length;
+            sprite5.src = frames5[index5];
+        }, 800);
+
+    </script>    
+
+{% endblock content %}
+

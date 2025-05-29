@@ -40,3 +40,17 @@ def account_view(request):
                 error_message = '予期せぬエラーが発生しました。もう一度お試しください。'
 
     return render(request, 'home/account.html', {'error_message': error_message})
+
+
+# ボーナス画面
+@login_required
+def bonus_view(request):
+
+    return render(request, 'home/bonus.html')
+
+
+# サンクス画面
+@login_required
+def thanks_view(request):
+
+    return render(request, 'home/thanks.html')

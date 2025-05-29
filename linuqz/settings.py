@@ -146,7 +146,7 @@ LOGOUT_REDIRECT_URL = "user:login"
 
 # ランクに関する定数
 RANK_1_NAME = '選択'
-RANK_1_CORRECT_POINT = 10
+RANK_1_CORRECT_POINT = 20
 RANK_1_INCORRECT_POINT = -5
 RANK_2_NAME = '記述'
 RANK_2_CORRECT_POINT = 20
@@ -157,4 +157,4 @@ TIME_LIMIT = 60  # 制限時間（秒）
 NUMBER_OF_QUESTIONS = 10  # 問題数
 
 # 経験値に関する定数
-EXP_COEFFICIENT = 50  # レベルアップ計算に使う係数
+EXP_COEFFICIENT = 100  # レベルアップ計算に使う係数

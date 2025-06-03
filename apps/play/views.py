@@ -57,6 +57,9 @@ def question_init(request):
     # セッションで管理する問題番号の初期化（0を設定）
     request.session["current"] = 0
 
+    # 残り時間の初期化
+    request.session["remaining_time"] = 0
+
     # セッションで管理するユーザ回答配列の初期化
     request.session["user_answers"] = []
 
